@@ -26,6 +26,7 @@
     "last 1 Chrome version"
   ],
   "dependencies": {
+    "@popperjs/core": "^2.10.1",
     "src": "^1.1.2"
   }
 }

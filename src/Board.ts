@@ -13,7 +13,6 @@ class Board {
 
   init() {
     let result = this.#tableToHTML()
-    console.log(result)
     this.#element.innerHTML = result
   }
 
@@ -35,6 +34,7 @@ class Board {
       }
       result += htmlrow + "</tr>\n"
     }
+
     return result
   }
 

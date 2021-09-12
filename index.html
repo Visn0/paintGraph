@@ -3,14 +3,62 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>paintGraph</title>
   <link rel="stylesheet" href="assets/board.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-  <table id="board">
-  </table>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <button class="btn btn-primary btn-lg text-white nav-link my-1 mx-0 p-3 px-5 w-100" href="#">Run</button>
+        </li>
+        <li class="nav-item dropdown">
+          <button class="btn btn-secondary btn-lg text-white nav-link dropdown-toggle m-1 ml-2 p-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Algorithm
+          </button>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <button class="btn btn-lg dropdown-item" href="#">Backtracking</button>
+            <button class="btn btn-lg dropdown-item" href="#">Branch and bound</button>
+          </div>
+        </li>
+      </ul>
 
+      <ul class="navbar-nav m-auto">
+        <li class="nav-item">
+          <button class="btn btn-primary btn-lg text-white nav-link m-1 p-3" href="#">Begin cell</button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-dark btn-lg text-white nav-link m-1 p-3" href="#">Wall cell</button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-success btn-lg text-white nav-link m-1 p-3" href="#">Exit cell</button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-outline-dark btn-lg text-dark nav-link m-1 p-3" href="#">Empty cell</button>
+        </li>
+      </ul>
+
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <button class="btn btn-danger btn-lg text-white nav-link m-1 p-3" href="#">Clear map</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <table id="board"></table>
+
+
+  <!-- Path finding -->
   <script src="index.ts"></script>
+
+
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@ window.onload = init
 let board
 
 function init() {
-  board = new Board(40, 60)
+  board = new Board(50, 100)
   board.init()
 }
 

@@ -1,15 +1,25 @@
-table {
-  height:100%;
-  width:100%;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  border:1px solid;
-  border-collapse: collapse;
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: rgba(0,0,0,.65)!important;
+}
+
+#board {
+  height: 90vmin;
+  width: 160vmin;
+  margin: 2px auto;
+  background-color: #fff;
+  border-radius: 10px;
 }
 
 td, tr{
-  border:1px solid black;
+  border:1px solid black!important;
+}
+
+.navbar-dark .nav-link {
+  color: #fff!important;
+  border-bottom: 2px solid #000;
 }
