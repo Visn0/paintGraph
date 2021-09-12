@@ -10,24 +10,13 @@ function init() {
   board.init()
 }
 
-declare global {
-  function onCellClick (event: Event, row: number, col: number);
-}
-
-const onCellClick = (event: Event, row: number, col: number) =>{
+window.onCellClick = (event?: Event, row?: number, col?: number) =>{
+  event.preventDefault()
   console.log("CELL_CLICK")
 }
 
-const onCellDrag = (event: Event, row: number, col: number) {
-  console.log("CELL_DRAG")
+window.onCellDrag = (event: Event, row: number, col: number) => {
+  console.log(event)
+  event.preventDefault()
+  console.log("CELL_DRAG, ", row, col)
 }
-
-const algo = (j: any) => {
-  console.log("ASDASD")
-}
-
-// export default {
-//   onCellClick,
-//   onCellDrag,
-//   algo
-// }
