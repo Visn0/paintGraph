@@ -4,7 +4,7 @@
   "description": "Path finding algorithms implementation using TypeScript and providing a UI to create different mazes as well as choosing different algorithms to solve the given maze.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html"
   },
   "keywords": [
     "TypeScript",
@@ -19,7 +19,10 @@
   "author": "Carlos Eduardo Arismendi Sánchez, Antón Chernysh",
   "license": "MIT",
   "devDependencies": {
-    "tsc": "^2.0.3",
+    "parcel-bundler": "^1.12.5",
     "typescript": "^4.4.3"
-  }
+  },
+  "browserslist": [
+    "last 1 Chrome version"
+  ]
 }
