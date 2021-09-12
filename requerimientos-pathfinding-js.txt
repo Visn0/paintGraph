@@ -2,7 +2,7 @@
 
 ### REQUERIMIENTOS ###
 1. Dibujar malla de RxC celdas, sindo R y C tamaños variables indicados por el usuario.
-2. El usuario debe poder elegir 3 tipos de celdas:
+2. El usuario debe poder elegir 3 tipos de celdas: inicio, final, muro
 	- Celda de inicio en laberinto [1, 1].
 		- El usuario debe poder moverlo sin necesidad de Borrar y Redibujar manualmente.
 	- Celda de inicio en laberinto [1, N).
@@ -20,3 +20,46 @@
 	- Una vez haya terminado la ejecución de un algoritmo y esté en la malla la representación de la busqueda del camino, el usuario podrá reiniciar la busqueda sin necesidad de modificar o rehacer el laberinto. Para ello deberán "limpiarse de pantalla" las busquedad del camino, manteniendo los muros y puntos entrada/salida.
 
 7. El usuario debe poder detener la ejecución del algoritmo en cualquier momento.
+
+
+# Tareas
+
+## Clases
+
+
+################################################
+### Board
+################################################
+- height, width 
+- celdas[][]
+- modo
+_____________
+- clearMap()
+- setCell()
+- setColorXY()
+
+################################################
+### Celda
+################################################
+- elem
+- fila, col
+- color/type // tipo de celda
+________________
+- setType()
+
+################################################
+### Factoria algoritmos
+################################################
+
+
+
+
+
+
+
+____________________________________________________________-
+- Poner las celdas
+- Rellenar de color las celdas por las que se arrastra (cuando se esta en modo muro)
+- Seleccionar inicio (cuando se esta en modo inicio)
+- Seleccionar final (cuando se esta en modo final)
+- 
