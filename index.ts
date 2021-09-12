@@ -6,11 +6,11 @@ window.onload = init
 let board
 
 function init() {
-  board = new Board(40, 60)
+  board = new Board(50, 70)
   board.init()
 }
 
-window.onCellClick = (event: Event, row: number, col: number) =>{
+window.onCellClick = (event: Event, row: number, col: number) => {
   event.preventDefault()
 }
 
