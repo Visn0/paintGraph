@@ -1,9 +1,13 @@
 import Board from './src/Board';
+import { CellType } from './src/CellType';
+
 import './src/EventHandlers';
 
 window.onload = init
+window.CellType = CellType
 
-let board
+let board: Board = null
+let cellType: CellType = CellType.EMPTY
 
 function init() {
   let rows: number = 70;
@@ -12,8 +16,9 @@ function init() {
   board.init()
 }
 
-window.onCellClick = (event: Event, row: number, col: number) => {
+window.onCellClick = (event: Event, row: number, column: number) => {
   event.preventDefault()
+  board.setCellType(row, column, cellType)
 }
 
 window.onCellDragStart = (event: event) => {
@@ -21,12 +26,19 @@ window.onCellDragStart = (event: event) => {
   event.dataTransfer.effectAllowed = 'move'
 }
 
-window.onCellDrag = (event: Event, row: number, col: number) => {
+window.onCellDrag = (event: Event, row: number, colum: number) => {
   event.preventDefault()
 }
 
-window.onCellOver = (event: Event, row: number, col: number) => {
+window.onCellOver = (event: Event, row: number, column: number) => {
   event.preventDefault()
-  let element = board.getElement(row, col)
-  element.style.backgroundColor = "red"
+  board.setCellType(row, column, cellType)
+}
+
+window.setCellToDraw = (event: Event, type: CellType) => {
+  cellType = type
+}
+
+window.clearBoard = (event: Event) => {
+  board.clear()
 }

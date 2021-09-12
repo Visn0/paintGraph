@@ -1,14 +1,18 @@
+import { CellType } from "./CellType"
+
 class Board {
-  #element = null
-  height = null
-  width = null
-  table = []
+  #element: HTMLElement = null
+  #height: number = null
+  #width: number = null
+  #table: Array<CellType> = []
+  #isThereBegin: boolean = false
+  #countExits: number = 0
 
   constructor(height, width) {
     this.#element =  document.getElementById('board')
-    this.height = height
-    this.width = width
-    this.table = Array(this.height).fill(Array(this.width)) // h*w
+    this.#height = height
+    this.#width = width
+    this.#table = Array(this.#height).fill(Array(this.#width))
   }
 
   init() {
@@ -16,12 +20,40 @@ class Board {
     this.#element.innerHTML = result
   }
 
+  clear() {
+    for(let r = 0; r < this.#height; r++) {
+      for(let c = 0; c < this.#width; c++) {
+        let elem = this.#getElementByCoords(r, c)
+        this.#removeCellCSSClass(elem, this.#table[r][c])
+        this.#table[r][c] = CellType.EMPTY
+      }
+    }
+  }
+
+  setCellType(row: number, column: number, type: CellType) {
+    // Only one begin cell is allowed
+    if (this.#isThereBegin && type == CellType.BEGIN) {
+      return
+    }
+
+    let elem = this.#getElementByCoords(row, column)
+
+    this.#removeCellCSSClass(elem, this.#table[row][column])
+    this.#addCellCSSClass(elem, type)
+
+    this.#table[row][column] = type
+  }
+
+  isThereBeginning(): boolean{
+    return this.#isThereBegin
+  }
+
   #tableToHTML() {
     let result = ""
 
-    for (let ir = 0; ir < this.height; ir++) {
+    for (let ir = 0; ir < this.#height; ir++) {
       let htmlrow = `<tr id="row${ir}">\n`
-      for (let ic = 0; ic < this.width; ic++) {
+      for (let ic = 0; ic < this.#width; ic++) {
         let htmlcell = `\t
         <td id="cell${ir}_${ic}"
           onclick="onCellClick(event, ${ir}, ${ic})"
@@ -38,9 +70,57 @@ class Board {
     return result
   }
 
-  getElement(row, col): HTMLElement {
-    let elem = document.getElementById(`cell${row}_${col}`)
-    return elem
+  #getElementByCoords(row: number, column: number): HTMLElement {
+    return document.getElementById(`cell${row}_${column}`)
+  }
+
+  #addCSSClass(elem: HTMLElement, cssClass: string) {
+    if (!elem.classList.contains(cssClass)) {
+      elem.classList.add(cssClass)
+    }
+  }
+
+  #removeCellCSSClass(elem: HTMLElement, type: CellType) {
+    switch (type) {
+      case CellType.BEGIN:
+        this.#isThereBegin = false
+        elem.className = ''
+        break
+
+      case CellType.WALL:
+        elem.className = ''
+        break
+
+      case CellType.EXIT:
+        elem.className = ''
+        this.#countExits -= 1
+        break
+
+      case CellType.EMPTY:
+        elem.className = ''
+        break
+    }
+  }
+
+  #addCellCSSClass(elem: HTMLElement, type: CellType) {
+    switch (type) {
+      case CellType.BEGIN:
+        this.#addCSSClass(elem, 'bg-primary')
+        this.#isThereBegin = true
+        break
+
+      case CellType.WALL:
+        this.#addCSSClass(elem, 'bg-secondary')
+        break
+
+      case CellType.EXIT:
+        this.#addCSSClass(elem, 'bg-success')
+        this.#countExits += 1
+        break
+
+      case CellType.EMPTY:
+        break
+    }
   }
 }
 
