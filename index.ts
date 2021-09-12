@@ -6,17 +6,25 @@ window.onload = init
 let board
 
 function init() {
-  board = new Board(3, 4)
+  board = new Board(40, 60)
   board.init()
 }
 
-window.onCellClick = (event?: Event, row?: number, col?: number) =>{
+window.onCellClick = (event: Event, row: number, col: number) =>{
   event.preventDefault()
-  console.log("CELL_CLICK")
+}
+
+window.onCellDragStart = (event: event) => {
+  event.dataTransfer.setDragImage(new Image(), 0, 0)
+  event.dataTransfer.effectAllowed = 'move'
 }
 
 window.onCellDrag = (event: Event, row: number, col: number) => {
-  console.log(event)
   event.preventDefault()
-  console.log("CELL_DRAG, ", row, col)
+}
+
+window.onCellOver = (event: Event, row: number, col: number) => {
+  event.preventDefault()
+  let element = board.getElement(row, col)
+  element.style.backgroundColor = "red"
 }
