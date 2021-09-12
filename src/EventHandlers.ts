@@ -1,4 +1,4 @@
-const onCellClick =  (event: Event, row: number, col: number) => {
+const onCellClick = (event: Event, row: number, col: number) => {
   console.log("CELL_CLICK")
 }
 
