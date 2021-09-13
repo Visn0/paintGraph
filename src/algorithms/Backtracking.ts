@@ -83,7 +83,7 @@ export class Backtracking implements IAlgorithm {
 
     // Render the explorated paths
     if (currentCell !== CellType.BEGIN) {
-      AnimationManager.setCellStyle(coord, CellType.EXPLORED, this.#animationDelay)
+      AnimationManager.setExploredCell(coord, this.#animationDelay)
     }
 
     // Explore surrounding cells
