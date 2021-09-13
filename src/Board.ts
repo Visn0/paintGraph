@@ -57,7 +57,7 @@ class Board {
   clear() {
     for(let r = 0; r < this.#rows; r++) {
       for(let c = 0; c < this.#columns; c++) {
-        AnimationManager.setCellStyle({ row: r, col: c}, CellType.EMPTY)
+        AnimationManager.setEmptyCell({ row: r, col: c})
         this.#table[r][c] = CellType.EMPTY
       }
     }

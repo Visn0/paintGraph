@@ -22,6 +22,12 @@ class AnimationManager {
     }, animationDelay + this.#animationCounter)
   }
 
+  static setEmptyCell (coord: ICoordinate) {
+    let elem = this.#getElementByCoord(coord)
+    elem.className = ''
+    elem.style.backgroundColor = ''
+  }
+
   static setCellStyle(coord: ICoordinate, type: CellType, animationDelay: number = 0) {
     let elem = this.#getElementByCoord(coord)
 
