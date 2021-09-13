@@ -8,7 +8,7 @@ export class BranchAndBound implements IAlgorithm {
     return []
   }
 
-  findPath(board: Board): BoardPath {
+  findPath(board: Board, animationDelay: number): BoardPath {
     return this.#solve(board)
   }
 }

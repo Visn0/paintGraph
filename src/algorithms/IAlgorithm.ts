@@ -9,7 +9,7 @@ export interface ICoordinate {
 export type BoardPath = Array<ICoordinate>
 
 export interface IAlgorithm {
-  findPath(board: Board): BoardPath
+  findPath(board: Board, animationDelay: number): BoardPath
 }
 
 export enum AlgorithmType {

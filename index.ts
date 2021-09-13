@@ -11,6 +11,7 @@ window.AlgorithmType = AlgorithmType
 let board: Board = null
 let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.BACKTRACKING)
+let animationDelay: number = 100
 
 function init() {
   // let rows: number = 70;
@@ -62,8 +63,8 @@ window.runAlgorithm = (event: Event) => {
 
 
   console.log(`Executing algorihm`)
-  const path: BoardPath = algorithm.findPath(board)
+  const path: BoardPath = algorithm.findPath(board, animationDelay)
   for(let i = 1; i < path.length-1; i++) {
-    AnimationManager.setCellStyle(path[i], CellType.PATH)
+    AnimationManager.setCellStyle(path[i], CellType.PATH, animationDelay)
   }
 }

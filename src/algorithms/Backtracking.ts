@@ -9,6 +9,7 @@ export class Backtracking implements IAlgorithm {
   #memoization: Array<Array<number>> = []
   #bestPath: BoardPath = []
   #moves: Array<ICoordinate>
+  #animationDelay: number
 
   constructor(){}
 
@@ -19,13 +20,13 @@ export class Backtracking implements IAlgorithm {
       this.#memoization.push(new Array<number>(board.width).fill(Number.MAX_SAFE_INTEGER))
     }
     this.#moves = [
-      // { row: 1,  col: -1 }, // up left
-      { row: 1,  col:  0 }, // up
-      // { row: 1,  col:  1 }, // up right
+      // { row: 1,  col: -1 }, // down left
+      { row: 1,  col:  0 }, // down
+      // { row: 1,  col:  1 }, // down right
       { row: 0,  col:  1 }, // right
-      // { row: -1, col:  1 }, // down right
-      { row: -1, col:  0 }, // down
-      // { row: -1, col: -1 }, // down left
+      // { row: -1, col:  1 }, // up right
+      { row: -1, col:  0 }, // up
+      // { row: -1, col: -1 }, // up left
       { row: 0,  col: -1 }, // left
     ]
   }
@@ -45,6 +46,7 @@ export class Backtracking implements IAlgorithm {
     }
 
     const currentCell = board.getCellType(coord)
+
     // Wall found
     if (currentCell === CellType.WALL) {
       return
@@ -68,18 +70,11 @@ export class Backtracking implements IAlgorithm {
 
     // Render the explorated paths
     if (currentCell !== CellType.BEGIN) {
-      AnimationManager.setCellStyle(coord, CellType.EXPLORED)
+      AnimationManager.setCellStyle(coord, CellType.EXPLORED, this.#animationDelay)
     }
 
     // Explore surrounding cells
     currentPath.push({ ...coord })
-    // for(let r = coord.row - 1; r <= coord.row + 1; r++) {
-    //   for(let c = coord.col - 1; c <= coord.col + 1; c++) {
-    //     if (r !== coord.row || c !== coord.col) {
-    //       this.#solve(board, { row: r, col: c }, currentPath)
-    //     }
-    //   }
-    // }
     for (let m of this.#moves) {
       let newCoord = { row: m.row + coord.row, col: m.col + coord.col }
       this.#solve(board, newCoord, currentPath)
@@ -88,10 +83,11 @@ export class Backtracking implements IAlgorithm {
     currentPath.splice(currentPath.length - 1, 1)
   }
 
-  findPath(board: Board): BoardPath {
+  findPath(board: Board, animationDelay: number): BoardPath {
     this.#init(board)
-
+    this.#animationDelay = animationDelay
     this.#solve(board, board.begin, [])
+
     return this.#bestPath
   }
 }
