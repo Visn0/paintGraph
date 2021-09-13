@@ -7,25 +7,41 @@ class Board {
   #columns: number = null
   #table: Array<CellType> = []
   #begin: ICoordinate = null
-  #countExits: number = 0
+  #exit: ICoordinate = null
 
-  constructor(height, width) {
+  constructor(height: number, width: number) {
     this.#element =  document.getElementById('board')
     this.#rows = height
     this.#columns = width
     this.#table = Array(this.#rows).fill(Array(this.#columns))
   }
 
-  get height() {
+  get height(): number {
     return this.#rows
   }
 
-  get width() {
+  get width(): number {
     return this.#columns
   }
 
-  get areThereExits() {
-    return this.#countExits > 0
+  get isThereBegin(): boolean {
+    return !!this.#begin
+  }
+
+  get isThereExit(): boolean {
+    return !!this.#exit
+  }
+
+  get begin(): ICoordinate {
+    return { ...this.#begin }
+  }
+
+  get exit(): ICoordinate {
+    return { ...this.#exit }
+  }
+
+  getCellType(coord: ICoordinate): CellType {
+    return this.#table[coord.row][coord.col]
   }
 
   init() {
@@ -47,8 +63,11 @@ class Board {
     if (type == CellType.BEGIN) {
       // Only one begin cell is allowed
       if (this.#begin) return
-
       this.#begin = { row: row, col: column }
+    } else if (type == CellType.EXIT) {
+      // Only one begin cell is allowed
+      if (this.#exit) return
+      this.#exit = { row: row, col: column }
     }
 
     let elem = this.#getElementByCoords(row, column)
@@ -57,10 +76,6 @@ class Board {
     this.#addCellCSSClass(elem, type)
 
     this.#table[row][column] = type
-  }
-
-  getBegin(): ICoordinate {
-    return this.#begin
   }
 
   #tableToHTML() {
@@ -107,8 +122,8 @@ class Board {
         break
 
       case CellType.EXIT:
+        this.#exit = null
         elem.className = ''
-        this.#countExits -= 1
         break
 
       case CellType.EMPTY:
@@ -129,7 +144,6 @@ class Board {
 
       case CellType.EXIT:
         this.#addCSSClass(elem, 'bg-success')
-        this.#countExits += 1
         break
 
       case CellType.EMPTY:
