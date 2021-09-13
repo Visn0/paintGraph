@@ -13,7 +13,7 @@ class Board {
     this.#element =  document.getElementById('board')
     this.#rows = height
     this.#columns = width
-    this.#table = Array(this.#rows).fill(Array(this.#columns))
+    this.#table = Array(this.#rows).fill(Array(this.#columns).fill(CellType.EMPTY))
   }
 
   get height(): number {
@@ -105,9 +105,7 @@ class Board {
   }
 
   #addCSSClass(elem: HTMLElement, cssClass: string) {
-    if (!elem.classList.contains(cssClass)) {
-      elem.classList.add(cssClass)
-    }
+    elem.className = cssClass
   }
 
   #removeCellCSSClass(elem: HTMLElement, type: CellType) {
@@ -129,6 +127,14 @@ class Board {
       case CellType.EMPTY:
         elem.className = ''
         break
+
+      case CellType.EXPLORED:
+        elem.className = ''
+        break
+
+      case CellType.PATH:
+        elem.className = ''
+        break
     }
   }
 
@@ -148,7 +154,16 @@ class Board {
 
       case CellType.EMPTY:
         break
-    }
+
+      case CellType.EXPLORED:
+        this.#addCSSClass(elem, 'bg-warning')
+        break
+
+      case CellType.PATH:
+        break
+      default:
+        console.log("ERROR")
+  }
   }
 }
 
