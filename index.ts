@@ -26,14 +26,13 @@ function init() {
 }
 
 function dfs(row, column, K) {
-  if (K <= 0)
+  if (K <= 1)
   {
     return;
   }
-
-  if (cellType === board.getCellType({ row: row, col: column })) return
-
-  board.setCellType(row, column, cellType)
+  moves.forEach(move => {
+    board.setCellType(row + move[0], column + move[1], cellType)
+  });
   moves.forEach(move => {
     dfs(row + move[0], column + move[1], K - 1)
   });
@@ -50,10 +49,8 @@ window.onCellClick = (event: Event, row: number, column: number) => {
   {
     dfs(row, column, thickness)
   }
-  else
-  {
-    board.setCellType(row, column, cellType)
-  }
+  board.setCellType(row, column, cellType)
+
 }
 
 window.onCellDragStart = (event: Event) => {
@@ -71,10 +68,7 @@ window.onCellOver = (event: Event, row: number, column: number) => {
   {
     dfs(row, column, thickness)
   }
-  else
-  {
-    board.setCellType(row, column, cellType)
-  }
+  board.setCellType(row, column, cellType)
 }
 
 window.setCellToDraw = (event: Event, type: CellType) => {
@@ -109,7 +103,8 @@ window.runAlgorithm = (event: Event) => {
 
   console.log(`Executing algorihm`)
   const path: BoardPath = algorithm.findPath(board, animationDelay)
-  for(let i = 1; i < path.length-1; i++) {
+  for (let i = 1; i < path.length - 1; i++)
+  {
     AnimationManager.setCellStyle(path[i], CellType.PATH, animationDelay)
   }
 }
