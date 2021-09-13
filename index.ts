@@ -15,8 +15,8 @@ let thickness: number = 1
 let animationDelay: number = 150
 
 function init() {
-  thickness = document.getElementById('thickness').value
-  let rows: number = 30;
+  thickness = parseInt(document.getElementById('thickness').value)
+  let rows: number = 50;
   // let rows: number = 10;
   let cols: number = rows * 2;
   board = new Board(rows, cols)
@@ -25,17 +25,27 @@ function init() {
   animationDelay /= rows
 }
 
-function dfs(row, column, K) {
-  if (K <= 1)
+function dfs(row: number, column: number, K: number) {
+  // if (K <= 0 || cellType === board.getCellType({ row: row, col: column }))
+  // {
+  //   return;
+  // }
+
+  // board.setCellType(row, column, cellType)
+  // moves.forEach(move => {
+  //   dfs(row + move[0], column + move[1], K - 1)
+  // });
+  K = parseInt(K - 1)
+
+  // console.log(row, column, K)
+  // console.log(Math.min(board.height, row + K), Math.min(board.width, column + K))
+  for (let i = Math.max(0, row - K); i <= Math.min(board.height - 1, row + K); i++)
   {
-    return;
+    for (let j = Math.max(0, column - K); j <= Math.min(board.width - 1, column + K); j++)
+    {
+      board.setCellType(i, j, cellType)
+    }
   }
-  moves.forEach(move => {
-    board.setCellType(row + move[0], column + move[1], cellType)
-  });
-  moves.forEach(move => {
-    dfs(row + move[0], column + move[1], K - 1)
-  });
 }
 
 function validForThickness(type) {
@@ -45,12 +55,18 @@ function validForThickness(type) {
 
 window.onCellClick = (event: Event, row: number, column: number) => {
   event.preventDefault()
+  if (board.getCellType({ row: row, col: column }) === cellType)
+  {
+    return
+  }
   if (validForThickness(cellType))
   {
     dfs(row, column, thickness)
   }
-  board.setCellType(row, column, cellType)
-
+  else
+  {
+    board.setCellType(row, column, cellType)
+  }
 }
 
 window.onCellDragStart = (event: Event) => {
@@ -64,11 +80,18 @@ window.onCellDrag = (event: Event, row: number, colum: number) => {
 
 window.onCellOver = (event: Event, row: number, column: number) => {
   event.preventDefault()
+  if (board.getCellType({ row: row, col: column }) === cellType)
+  {
+    return
+  }
   if (validForThickness(cellType))
   {
     dfs(row, column, thickness)
   }
-  board.setCellType(row, column, cellType)
+  else
+  {
+    board.setCellType(row, column, cellType)
+  }
 }
 
 window.setCellToDraw = (event: Event, type: CellType) => {
@@ -76,7 +99,12 @@ window.setCellToDraw = (event: Event, type: CellType) => {
 }
 
 window.setThickness = (event: Event) => {
+<<<<<<< HEAD
+  thickness = parseInt(event.target.value)
+  animationDelay = 100 / thickness
+=======
   thickness = event.target.value
+>>>>>>> 51d4413c95a453ba9384afbd7d2a48cd24e41f75
 
   let elemValueThickness = document.getElementById('thickness_label_value')
   elemValueThickness.innerHTML = thickness
