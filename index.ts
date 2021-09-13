@@ -13,7 +13,7 @@ let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.BACKTRACKING)
 
 function init() {
   // let rows: number = 70;
-  let rows: number = 4;
+  let rows: number = 10;
   let cols: number = rows * 2;
   board = new Board(rows, cols)
   board.init()

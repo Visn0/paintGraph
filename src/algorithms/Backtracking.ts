@@ -1,6 +1,7 @@
 import { IAlgorithm, ICoordinate, BoardPath } from './IAlgorithm'
 import Board from '../Board'
 import { CellType } from '../CellType';
+import { stringify } from 'querystring';
 
 export class Backtracking implements IAlgorithm {
   // This matrix will store the best path found to reach a given cell
@@ -9,6 +10,14 @@ export class Backtracking implements IAlgorithm {
   #time: number = 0
 
   constructor(){}
+
+  #init(board: Board) {
+    this.#bestPath = []
+    this.#memoization = new Array<Array<number>>()
+    for(let r = 0; r < board.height; ++r) {
+      this.#memoization.push(new Array<number>(board.width).fill(Number.MAX_SAFE_INTEGER))
+    }
+  }
 
   #setMemoization(coord: ICoordinate, value: number) {
     this.#memoization[coord.row][coord.col] = value
@@ -21,7 +30,6 @@ export class Backtracking implements IAlgorithm {
   #solve(board: Board, coord: ICoordinate, currentPath: BoardPath) {
     // Out of board
     if(coord.row >= board.height || coord.row < 0 || coord.col >= board.width || coord.col < 0) {
-      // console.log("out of board")
       return
     }
 
@@ -35,8 +43,7 @@ export class Backtracking implements IAlgorithm {
     }
 
     // The path used to reach the current cell is longer than a previous found path
-    if (currentPath.length >= this.#getMemoization(coord) - 1) {
-      // console.log("path longer")
+    if (currentPath.length > this.#getMemoization(coord) - 1) {
       return
     }
 
@@ -60,43 +67,24 @@ export class Backtracking implements IAlgorithm {
 
     // Explore surrounding cells
     currentPath.push({ ...coord })
-    // for(let r = coord.row - 1; r <= coord.row + 1; r++) {
-    //   for(let c = coord.col - 1; c <= coord.col + 1; c++) {
-    //     if (r !== coord.row || c !== coord.col) {
-    //       console.log(r, c)
-    //       this.#solve(board, { row: r, col: c }, currentPath)
-    //     }
-    //   }
-    // }
-    this.#solve(board, { row: coord.row - 1, col: coord.col - 1 }, currentPath)
-    this.#solve(board, { row: coord.row - 1, col: coord.col }, currentPath)
-    this.#solve(board, { row: coord.row - 1, col: coord.col + 1 }, currentPath)
-    this.#solve(board, { row: coord.row, col: coord.col + 1 }, currentPath)
-    this.#solve(board, { row: coord.row + 1, col: coord.col + 1 }, currentPath)
-    this.#solve(board, { row: coord.row + 1, col: coord.col }, currentPath)
-    this.#solve(board, { row: coord.row + 1, col: coord.col - 1 }, currentPath)
-    this.#solve(board, { row: coord.row, col: coord.col - 1}, currentPath)
+    for(let r = coord.row - 1; r <= coord.row + 1; r++) {
+      for(let c = coord.col - 1; c <= coord.col + 1; c++) {
+        if (r !== coord.row || c !== coord.col) {
+          console.log(r, c)
+          this.#solve(board, { row: r, col: c }, currentPath)
+        }
+      }
+    }
 
     currentPath.splice(currentPath.length - 1, 1)
   }
 
   findPath(board: Board): BoardPath {
-    this.#bestPath = []
-    this.#memoization = Array(board.height).fill(Array(board.width).fill(999))//Number.MAX_SAFE_INTEGER))
+    this.#init(board)
 
     this.#solve(board, board.begin, [])
     console.log(this.#bestPath)
+    console.log(JSON.stringify( this.#memoization ))
     return this.#bestPath
-  }
-}
-
-class A {
-  constructor(){}
-  foo(n) {
-    if(n <= 0) return
-    if(n % 2 == 0) return
-    console.log(n)
-    this.foo(n-1)
-    this.foo(n-2)
   }
 }
