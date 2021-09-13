@@ -1,3 +1,4 @@
+import { type } from "os"
 import { ICoordinate } from "./algorithms/IAlgorithm"
 import { CellType } from "./CellType"
 
@@ -5,7 +6,8 @@ class Board {
   #element: HTMLElement = null
   #rows: number = null
   #columns: number = null
-  #table: Array<CellType> = []
+  #table: Array<Array<CellType>> = []
+  // #table: CellType[][]
   #begin: ICoordinate = null
   #exit: ICoordinate = null
 
@@ -13,7 +15,10 @@ class Board {
     this.#element =  document.getElementById('board')
     this.#rows = height
     this.#columns = width
-    this.#table = Array(this.#rows).fill(Array(this.#columns).fill(CellType.EMPTY))
+    this.#table = new Array<Array<CellType>>()
+    for(let r = 0; r < height; ++r) {
+      this.#table.push(new Array<CellType>(width).fill(CellType.EMPTY))
+    }
   }
 
   get height(): number {
