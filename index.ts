@@ -53,6 +53,11 @@ window.setAlgorithm = (event: Event, algorithmType: AlgorithmType) => {
 }
 
 window.runAlgorithm = (event: Event) => {
+  if (!board.getBegin() || !board.isThereExits) {
+    console.log('Missing beginning or exit.')
+    return
+  }
+
   console.log(`Executing algorihm`)
   algorithm.findPath(board)
 }

@@ -24,6 +24,10 @@ class Board {
     return this.#columns
   }
 
+  get isThereExits() {
+    return this.#countExits > 0
+  }
+
   init() {
     let result = this.#tableToHTML()
     this.#element.innerHTML = result
