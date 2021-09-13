@@ -23,7 +23,7 @@ window.onCellClick = (event: Event, row: number, column: number) => {
   board.setCellType(row, column, cellType)
 }
 
-window.onCellDragStart = (event: event) => {
+window.onCellDragStart = (event: Event) => {
   event.dataTransfer.setDragImage(new Image(), 0, 0)
   event.dataTransfer.effectAllowed = 'move'
 }
