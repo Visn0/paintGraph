@@ -52,6 +52,7 @@ window.setAlgorithm = (event: Event, algorithmType: AlgorithmType) => {
   elem.innerText = algorithmType
 }
 
-window.runPathFinding = (event: Event) => {
+window.runAlgorithm = (event: Event) => {
+  console.log(`Executing algorihm`)
   algorithm.findPath(board)
 }
