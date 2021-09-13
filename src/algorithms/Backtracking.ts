@@ -1,4 +1,4 @@
-import { IAlgorithm, ICoordinate, BoardPath, PitagorasDistance } from './IAlgorithm'
+import { IAlgorithm, ICoordinate, BoardPath, PitagorasDistance, ManhattanDistance } from './IAlgorithm'
 import Board from '../Board'
 import { CellType } from '../CellType';
 import { stringify } from 'querystring';
@@ -10,6 +10,7 @@ export class Backtracking implements IAlgorithm {
   #bestPath: BoardPath = []
   #moves: Array<ICoordinate>
   #animationDelay: number
+  #beginDistanceToExit: number
 
   constructor(){}
 
@@ -29,6 +30,8 @@ export class Backtracking implements IAlgorithm {
       // { row: -1, col: -1 }, // up left
       { row: 0,  col: -1 }, // left
     ]
+
+    this.#beginDistanceToExit = ManhattanDistance(board.begin, board.exit)
   }
 
   #setMemoization(coord: ICoordinate, value: number) {
@@ -43,7 +46,9 @@ export class Backtracking implements IAlgorithm {
     if (currentPath.length >= this.#getMemoization(coord) - 1 || (currentPath.length >= this.#bestPath.length && this.#bestPath.length > 0))
       return false
 
-    let optimisticDistance = PitagorasDistance(coord, board.exit) + currentPath.length + 1
+    let optimisticDistance = PitagorasDistance(coord, board.exit) + currentPath.length
+    if (optimisticDistance > this.#beginDistanceToExit) return false
+
     return optimisticDistance < this.#bestPath.length || this.#bestPath.length === 0
   }
 
@@ -66,7 +71,7 @@ export class Backtracking implements IAlgorithm {
     }
 
     // Update cache of explorated paths
-    this.#setMemoization(coord, currentPath.length)
+    this.#setMemoization(coord, currentPath.length + 1)
 
     // Check if exit is found
     if (currentCell === CellType.EXIT) {

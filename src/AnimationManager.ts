@@ -36,9 +36,9 @@ class AnimationManager {
         break
 
       case CellType.EXPLORED:
-        let prevColor: string = elem.style.backgroundColor ? elem.style.backgroundColor : "rgba(163, 80, 220, 0.16)"
+        let prevColor: string = elem.style.backgroundColor ? elem.style.backgroundColor : "rgba(163, 80, 220, 0.20)"
         prevColor = prevColor.split(',')[3]
-        elem.style.backgroundColor = `rgba(163, 80, 255, ${parseFloat(prevColor) + 0.02})`
+        elem.style.backgroundColor = `rgba(163, 80, 255, ${parseFloat(prevColor) + 0.04})`
         break
 
       case CellType.PATH:

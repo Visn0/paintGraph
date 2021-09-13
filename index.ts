@@ -99,12 +99,7 @@ window.setCellToDraw = (event: Event, type: CellType) => {
 }
 
 window.setThickness = (event: Event) => {
-<<<<<<< HEAD
   thickness = parseInt(event.target.value)
-  animationDelay = 100 / thickness
-=======
-  thickness = event.target.value
->>>>>>> 51d4413c95a453ba9384afbd7d2a48cd24e41f75
 
   let elemValueThickness = document.getElementById('thickness_label_value')
   elemValueThickness.innerHTML = thickness
