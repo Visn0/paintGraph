@@ -29,6 +29,8 @@ function dfs(row, column, K) {
     return;
   }
 
+  if (cellType === board.getCellType({ row: row, col: column })) return
+
   board.setCellType(row, column, cellType)
   moves.forEach(move => {
     dfs(row + move[0], column + move[1], K - 1)
