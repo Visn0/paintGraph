@@ -17,4 +17,4 @@ export enum AlgorithmType {
   BRANCH_AND_BOUND = 'Branch&Bound'
 }
 
-export const moves = [[-1, 0], [1, 0], [0, -1], [0, 1]]
+export const moves = [[-1, 0], [0, -1], [1, 0], [0, 1]]
