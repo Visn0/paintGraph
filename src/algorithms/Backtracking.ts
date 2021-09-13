@@ -1,4 +1,4 @@
-import { IAlgorithm, ICoordinate, BoardPath } from './IAlgorithm'
+import { IAlgorithm, ICoordinate, BoardPath, PitagorasDistance } from './IAlgorithm'
 import Board from '../Board'
 import { CellType } from '../CellType';
 import { stringify } from 'querystring';
@@ -39,6 +39,14 @@ export class Backtracking implements IAlgorithm {
     return this.#memoization[coord.row][coord.col]
   }
 
+  #isNodePromising(board: Board, coord: ICoordinate, currentPath: BoardPath) {
+    if (currentPath.length >= this.#getMemoization(coord) - 1 || (currentPath.length >= this.#bestPath.length && this.#bestPath.length > 0))
+      return false
+
+    let optimisticDistance = PitagorasDistance(coord, board.exit) + currentPath.length + 1
+    return optimisticDistance < this.#bestPath.length || this.#bestPath.length === 0
+  }
+
   #solve(board: Board, coord: ICoordinate, currentPath: BoardPath) {
     // Out of board
     if(coord.row >= board.height || coord.row < 0 || coord.col >= board.width || coord.col < 0) {
@@ -53,7 +61,7 @@ export class Backtracking implements IAlgorithm {
     }
 
     // The path used to reach the current cell is longer than a previous found path
-    if (currentPath.length >= this.#getMemoization(coord) - 1 || (currentPath.length >= this.#bestPath.length && this.#bestPath.length > 0)) {
+    if (!this.#isNodePromising(board, coord, currentPath)) {
       return
     }
 

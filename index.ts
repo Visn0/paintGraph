@@ -12,15 +12,17 @@ let board: Board = null
 let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.BACKTRACKING)
 let thickness: number = 1
-let animationDelay: number = 100 / thickness
+let animationDelay: number = 150
 
 function init() {
   thickness = document.getElementById('thickness').value
-  let rows: number = 50;
+  let rows: number = 30;
   // let rows: number = 10;
   let cols: number = rows * 2;
   board = new Board(rows, cols)
   board.init()
+
+  animationDelay /= rows
 }
 
 function dfs(row, column, K) {
@@ -81,7 +83,6 @@ window.setCellToDraw = (event: Event, type: CellType) => {
 
 window.setThickness = (event: Event) => {
   thickness = event.target.value
-  animationDelay = 100 / thickness
 
   let elemValueThickness = document.getElementById('thickness_label_value')
   elemValueThickness.innerHTML = thickness
