@@ -24,7 +24,7 @@ class Board {
     return this.#columns
   }
 
-  get isThereExits() {
+  get areThereExits() {
     return this.#countExits > 0
   }
 

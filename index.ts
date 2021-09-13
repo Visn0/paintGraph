@@ -53,7 +53,7 @@ window.setAlgorithm = (event: Event, algorithmType: AlgorithmType) => {
 }
 
 window.runAlgorithm = (event: Event) => {
-  if (!board.getBegin() || !board.isThereExits) {
+  if (!board.getBegin() || !board.areThereExits) {
     console.log('Missing beginning or exit.')
     return
   }
