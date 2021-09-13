@@ -78,6 +78,8 @@ window.setCellToDraw = (event: Event, type: CellType) => {
 
 window.setThickness = (event: Event) => {
   thickness = event.target.value
+  let elemValueThickness = document.getElementById('thickness_label_value')
+  elemValueThickness.innerHTML = thickness
   console.log(event.target.value)
 }
 
