@@ -34,8 +34,6 @@ class AnimationManager {
       case CellType.PATH:
         elem.className = 'bg-danger'
         break
-      default:
-        console.log("ERROR")
     }
   }
 }

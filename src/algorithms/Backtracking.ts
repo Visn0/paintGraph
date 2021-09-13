@@ -92,7 +92,6 @@ export class Backtracking implements IAlgorithm {
     this.#init(board)
 
     this.#solve(board, board.begin, [])
-    console.log(this.#bestPath)
     return this.#bestPath
   }
 }
