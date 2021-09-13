@@ -12,7 +12,8 @@ let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.BACKTRACKING)
 
 function init() {
-  let rows: number = 70;
+  // let rows: number = 70;
+  let rows: number = 4;
   let cols: number = rows * 2;
   board = new Board(rows, cols)
   board.init()
@@ -53,6 +54,8 @@ window.setAlgorithm = (event: Event, algorithmType: AlgorithmType) => {
 }
 
 window.runAlgorithm = (event: Event) => {
+  console.log(board.begin)
+  console.log(board.exit)
   if (!board.isThereBegin || !board.isThereExit) {
     console.log('Missing beginning or exit.')
     return
