@@ -11,8 +11,8 @@ window.AlgorithmType = AlgorithmType
 let board: Board = null
 let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.BACKTRACKING)
-let animationDelay: number = 100
 let thickness: number = 1
+let animationDelay: number = 100 / thickness
 
 function init() {
   thickness = document.getElementById('thickness').value
@@ -79,6 +79,8 @@ window.setCellToDraw = (event: Event, type: CellType) => {
 
 window.setThickness = (event: Event) => {
   thickness = event.target.value
+  animationDelay = 100 / thickness
+
   let elemValueThickness = document.getElementById('thickness_label_value')
   elemValueThickness.innerHTML = thickness
   console.log(event.target.value)
@@ -102,17 +104,9 @@ window.runAlgorithm = (event: Event) => {
     return
   }
 
-
   console.log(`Executing algorihm`)
-<<<<<<< HEAD
   const path: BoardPath = algorithm.findPath(board, animationDelay)
   for(let i = 1; i < path.length-1; i++) {
     AnimationManager.setCellStyle(path[i], CellType.PATH, animationDelay)
-=======
-  const path: BoardPath = algorithm.findPath(board)
-  for (let i = 1; i < path.length - 1; i++)
-  {
-    AnimationManager.setCellStyle(path[i], CellType.PATH)
->>>>>>> 1d1e1de9894a89cb4322cf340c5adc7891e5386a
   }
 }
