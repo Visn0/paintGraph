@@ -1,3 +1,4 @@
+import { ICoordinate } from "./algorithms/IAlgorithm"
 import { CellType } from "./CellType"
 
 class Board {
@@ -5,7 +6,7 @@ class Board {
   #height: number = null
   #width: number = null
   #table: Array<CellType> = []
-  #isThereBegin: boolean = false
+  #begin: ICoordinate = null
   #countExits: number = 0
 
   constructor(height, width) {
@@ -31,9 +32,11 @@ class Board {
   }
 
   setCellType(row: number, column: number, type: CellType) {
-    // Only one begin cell is allowed
-    if (this.#isThereBegin && type == CellType.BEGIN) {
-      return
+    if (type == CellType.BEGIN) {
+      // Only one begin cell is allowed
+      if (this.#begin) return
+
+      this.#begin = { row: row, col: column }
     }
 
     let elem = this.#getElementByCoords(row, column)
@@ -44,8 +47,8 @@ class Board {
     this.#table[row][column] = type
   }
 
-  isThereBeginning(): boolean{
-    return this.#isThereBegin
+  getBegin(): ICoordinate {
+    return this.#begin
   }
 
   #tableToHTML() {
@@ -83,7 +86,7 @@ class Board {
   #removeCellCSSClass(elem: HTMLElement, type: CellType) {
     switch (type) {
       case CellType.BEGIN:
-        this.#isThereBegin = false
+        this.#begin = null
         elem.className = ''
         break
 
@@ -106,7 +109,6 @@ class Board {
     switch (type) {
       case CellType.BEGIN:
         this.#addCSSClass(elem, 'bg-primary')
-        this.#isThereBegin = true
         break
 
       case CellType.WALL:

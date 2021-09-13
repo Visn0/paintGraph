@@ -1,13 +1,15 @@
+import { FactoryAlgorithm } from './src/algorithms/FactoryAlgorithm';
+import { AlgorithmType, IAlgorithm } from './src/algorithms/IAlgorithm';
 import Board from './src/Board';
 import { CellType } from './src/CellType';
 
-import './src/EventHandlers';
-
 window.onload = init
 window.CellType = CellType
+window.AlgorithmType = AlgorithmType
 
 let board: Board = null
 let cellType: CellType = CellType.EMPTY
+let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.BACKTRACKING)
 
 function init() {
   let rows: number = 70;
@@ -41,4 +43,15 @@ window.setCellToDraw = (event: Event, type: CellType) => {
 
 window.clearBoard = (event: Event) => {
   board.clear()
+}
+
+window.setAlgorithm = (event: Event, algorithmType: AlgorithmType) => {
+  algorithm = FactoryAlgorithm(algorithmType)
+
+  let elem = document.getElementById('navbarDropdown')
+  elem.innerText = algorithmType
+}
+
+window.runPathFinding = (event: Event) => {
+  algorithm.findPath(board)
 }
