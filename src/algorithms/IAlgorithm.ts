@@ -16,3 +16,5 @@ export enum AlgorithmType {
   BACKTRACKING = "Backtracking",
   BRANCH_AND_BOUND = 'Branch&Bound'
 }
+
+export let moves = [[-1, 0], [1, 0], [0, -1], [0, 1]]

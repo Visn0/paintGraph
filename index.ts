@@ -1,5 +1,5 @@
 import { FactoryAlgorithm } from './src/algorithms/FactoryAlgorithm';
-import { AlgorithmType, BoardPath, IAlgorithm } from './src/algorithms/IAlgorithm';
+import { AlgorithmType, BoardPath, IAlgorithm, moves } from './src/algorithms/IAlgorithm';
 import AnimationManager from './src/AnimationManager';
 import Board from './src/Board';
 import { CellType } from './src/CellType';
@@ -11,18 +11,44 @@ window.AlgorithmType = AlgorithmType
 let board: Board = null
 let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.BACKTRACKING)
+let thickness: number = 1
 
 function init() {
-  // let rows: number = 70;
-  let rows: number = 10;
+  thickness = document.getElementById('thickness').value
+  let rows: number = 50;
+  // let rows: number = 10;
   let cols: number = rows * 2;
   board = new Board(rows, cols)
   board.init()
 }
 
+function dfs(row, column, K) {
+  if (K <= 0)
+  {
+    return;
+  }
+
+  board.setCellType(row, column, cellType)
+  moves.forEach(move => {
+    dfs(row + move[0], column + move[1], K - 1)
+  });
+}
+
+function validForThickness(type) {
+  let validTypes = [CellType.EMPTY, CellType.WALL]
+  return validTypes.includes(type)
+}
+
 window.onCellClick = (event: Event, row: number, column: number) => {
   event.preventDefault()
-  board.setCellType(row, column, cellType)
+  if (validForThickness(cellType))
+  {
+    dfs(row, column, thickness)
+  }
+  else
+  {
+    board.setCellType(row, column, cellType)
+  }
 }
 
 window.onCellDragStart = (event: Event) => {
@@ -36,11 +62,23 @@ window.onCellDrag = (event: Event, row: number, colum: number) => {
 
 window.onCellOver = (event: Event, row: number, column: number) => {
   event.preventDefault()
-  board.setCellType(row, column, cellType)
+  if (validForThickness(cellType))
+  {
+    dfs(row, column, thickness)
+  }
+  else
+  {
+    board.setCellType(row, column, cellType)
+  }
 }
 
 window.setCellToDraw = (event: Event, type: CellType) => {
   cellType = type
+}
+
+window.setThickness = (event: Event) => {
+  thickness = event.target.value
+  console.log(event.target.value)
 }
 
 window.clearBoard = (event: Event) => {
@@ -55,7 +93,8 @@ window.setAlgorithm = (event: Event, algorithmType: AlgorithmType) => {
 }
 
 window.runAlgorithm = (event: Event) => {
-  if (!board.isThereBegin || !board.isThereExit) {
+  if (!board.isThereBegin || !board.isThereExit)
+  {
     console.log('Missing beginning or exit.')
     return
   }
@@ -63,7 +102,8 @@ window.runAlgorithm = (event: Event) => {
 
   console.log(`Executing algorihm`)
   const path: BoardPath = algorithm.findPath(board)
-  for(let i = 1; i < path.length-1; i++) {
+  for (let i = 1; i < path.length - 1; i++)
+  {
     AnimationManager.setCellStyle(path[i], CellType.PATH)
   }
 }
