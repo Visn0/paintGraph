@@ -3,17 +3,25 @@ import { CellType } from "./CellType"
 
 class Board {
   #element: HTMLElement = null
-  #height: number = null
-  #width: number = null
+  #rows: number = null
+  #columns: number = null
   #table: Array<CellType> = []
   #begin: ICoordinate = null
   #countExits: number = 0
 
   constructor(height, width) {
     this.#element =  document.getElementById('board')
-    this.#height = height
-    this.#width = width
-    this.#table = Array(this.#height).fill(Array(this.#width))
+    this.#rows = height
+    this.#columns = width
+    this.#table = Array(this.#rows).fill(Array(this.#columns))
+  }
+
+  get height() {
+    return this.#rows
+  }
+
+  get width() {
+    return this.#columns
   }
 
   init() {
@@ -22,8 +30,8 @@ class Board {
   }
 
   clear() {
-    for(let r = 0; r < this.#height; r++) {
-      for(let c = 0; c < this.#width; c++) {
+    for(let r = 0; r < this.#rows; r++) {
+      for(let c = 0; c < this.#columns; c++) {
         let elem = this.#getElementByCoords(r, c)
         this.#removeCellCSSClass(elem, this.#table[r][c])
         this.#table[r][c] = CellType.EMPTY
@@ -54,9 +62,9 @@ class Board {
   #tableToHTML() {
     let result = ""
 
-    for (let ir = 0; ir < this.#height; ir++) {
+    for (let ir = 0; ir < this.#rows; ir++) {
       let htmlrow = `<tr id="row${ir}">\n`
-      for (let ic = 0; ic < this.#width; ic++) {
+      for (let ic = 0; ic < this.#columns; ic++) {
         let htmlcell = `\t
         <td id="cell${ir}_${ic}"
           onclick="onCellClick(event, ${ir}, ${ic})"

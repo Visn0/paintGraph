@@ -6,12 +6,10 @@ export interface ICoordinate {
   col: number
 }
 
-export interface IPath {
-  [index: number]: ICoordinate
-}
+export type BoardPath = Array<ICoordinate>
 
 export interface IAlgorithm {
-  findPath(board: Board): IPath
+  findPath(board: Board): BoardPath
 }
 
 export enum AlgorithmType {
