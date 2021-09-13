@@ -1,5 +1,6 @@
 import { FactoryAlgorithm } from './src/algorithms/FactoryAlgorithm';
-import { AlgorithmType, IAlgorithm } from './src/algorithms/IAlgorithm';
+import { AlgorithmType, BoardPath, IAlgorithm } from './src/algorithms/IAlgorithm';
+import AnimationManager from './src/AnimationManager';
 import Board from './src/Board';
 import { CellType } from './src/CellType';
 
@@ -54,8 +55,6 @@ window.setAlgorithm = (event: Event, algorithmType: AlgorithmType) => {
 }
 
 window.runAlgorithm = (event: Event) => {
-  console.log(board.begin)
-  console.log(board.exit)
   if (!board.isThereBegin || !board.isThereExit) {
     console.log('Missing beginning or exit.')
     return
@@ -63,5 +62,8 @@ window.runAlgorithm = (event: Event) => {
 
 
   console.log(`Executing algorihm`)
-  algorithm.findPath(board)
+  const path: BoardPath = algorithm.findPath(board)
+  for(let i = 1; i < path.length-1; i++) {
+    AnimationManager.setCellStyle(path[i], CellType.PATH)
+  }
 }

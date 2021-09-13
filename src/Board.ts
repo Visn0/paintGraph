@@ -1,5 +1,6 @@
 import { type } from "os"
 import { ICoordinate } from "./algorithms/IAlgorithm"
+import AnimationManager from './AnimationManager'
 import { CellType } from "./CellType"
 
 class Board {
@@ -7,7 +8,6 @@ class Board {
   #rows: number = null
   #columns: number = null
   #table: Array<Array<CellType>> = []
-  // #table: CellType[][]
   #begin: ICoordinate = null
   #exit: ICoordinate = null
 
@@ -57,11 +57,13 @@ class Board {
   clear() {
     for(let r = 0; r < this.#rows; r++) {
       for(let c = 0; c < this.#columns; c++) {
-        let elem = this.#getElementByCoords(r, c)
-        this.#removeCellCSSClass(elem, this.#table[r][c])
+        AnimationManager.setCellStyle({ row: r, col: c}, CellType.EMPTY)
         this.#table[r][c] = CellType.EMPTY
       }
     }
+
+    this.#begin = null
+    this.#exit = null
   }
 
   setCellType(row: number, column: number, type: CellType) {
@@ -75,10 +77,14 @@ class Board {
       this.#exit = { row: row, col: column }
     }
 
-    let elem = this.#getElementByCoords(row, column)
+    AnimationManager.setCellStyle({ row: row, col: column }, type)
 
-    this.#removeCellCSSClass(elem, this.#table[row][column])
-    this.#addCellCSSClass(elem, type)
+    const oldType = this.#table[row][column]
+    if (oldType === CellType.BEGIN) {
+      this.#begin = null
+    } else if (oldType === CellType.EXIT) {
+      this.#exit = null
+    }
 
     this.#table[row][column] = type
   }
@@ -103,72 +109,6 @@ class Board {
     }
 
     return result
-  }
-
-  #getElementByCoords(row: number, column: number): HTMLElement {
-    return document.getElementById(`cell${row}_${column}`)
-  }
-
-  #addCSSClass(elem: HTMLElement, cssClass: string) {
-    elem.className = cssClass
-  }
-
-  #removeCellCSSClass(elem: HTMLElement, type: CellType) {
-    switch (type) {
-      case CellType.BEGIN:
-        this.#begin = null
-        elem.className = ''
-        break
-
-      case CellType.WALL:
-        elem.className = ''
-        break
-
-      case CellType.EXIT:
-        this.#exit = null
-        elem.className = ''
-        break
-
-      case CellType.EMPTY:
-        elem.className = ''
-        break
-
-      case CellType.EXPLORED:
-        elem.className = ''
-        break
-
-      case CellType.PATH:
-        elem.className = ''
-        break
-    }
-  }
-
-  #addCellCSSClass(elem: HTMLElement, type: CellType) {
-    switch (type) {
-      case CellType.BEGIN:
-        this.#addCSSClass(elem, 'bg-primary')
-        break
-
-      case CellType.WALL:
-        this.#addCSSClass(elem, 'bg-secondary')
-        break
-
-      case CellType.EXIT:
-        this.#addCSSClass(elem, 'bg-success')
-        break
-
-      case CellType.EMPTY:
-        break
-
-      case CellType.EXPLORED:
-        this.#addCSSClass(elem, 'bg-warning')
-        break
-
-      case CellType.PATH:
-        break
-      default:
-        console.log("ERROR")
-  }
   }
 }
 
