@@ -10,7 +10,7 @@ window.AlgorithmType = AlgorithmType
 
 let board: Board = null
 let cellType: CellType = CellType.EMPTY
-let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.BACKTRACKING)
+let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
 let animationDelay: number = 150
 
@@ -127,4 +127,5 @@ window.runAlgorithm = (event: Event) => {
   {
     AnimationManager.setCellStyle(path[i], CellType.PATH, animationDelay)
   }
+  console.log(`Finished algorihm`)
 }

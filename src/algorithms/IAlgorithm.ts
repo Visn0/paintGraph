@@ -13,12 +13,14 @@ export interface IAlgorithm {
 export interface ICoordinate {
   row: number
   col: number
+  bound?: number // bound used in A* algorithm to sort the priority queue
+  path?: Array<ICoordinate> // path followed to reach this cell
 }
 
 export enum AlgorithmType {
   BACKTRACKING = "Backtracking",
-  BACKTRACKING_RAW = "BacktrackingRaw",
-  BRANCH_AND_BOUND = 'Branch&Bound'
+  BRANCH_AND_BOUND = 'Branch&Bound',
+  A_STAR = 'A Star (A*)'
 }
 
 
@@ -51,3 +53,6 @@ export function validCoord(coord: ICoordinate, maxRow: number, maxCol: number): 
     && coord.col < maxCol && coord.col >= 0)
 }
 
+export function compareCoords (a: ICoordinate, b: ICoordinate): boolean {
+  return a.bound < b.bound
+}
