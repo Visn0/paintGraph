@@ -26,7 +26,17 @@ export enum AlgorithmType {
 // UTILS
 /////////////////////////////////
 
-export const moves = [[-1, 0], [0, -1], [1, 0], [0, 1]]
+export const MOVES = [
+  // { row: 1,  col: -1 }, // down left
+  { row: 1, col: 0 }, // down
+  // { row: 1,  col:  1 }, // down right
+  { row: 0, col: 1 }, // right
+  // { row: -1, col:  1 }, // up right
+  { row: -1, col: 0 }, // up
+  // { row: -1, col: -1 }, // up left
+  { row: 0, col: -1 }, // left
+]
+
 
 export function EuclideanDistance(a: ICoordinate, b: ICoordinate): number {
   return Math.sqrt(Math.abs(a.row - b.row) + Math.abs(a.col - b.col))

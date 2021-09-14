@@ -1,16 +1,13 @@
-import { IAlgorithm, ICoordinate, BoardPath, EuclideanDistance, ManhattanDistance } from './IAlgorithm'
+import { IAlgorithm, ICoordinate, BoardPath, EuclideanDistance, MOVES } from './IAlgorithm'
 import Board from '../Board'
 import { CellType } from '../CellType';
-import { stringify } from 'querystring';
 import AnimationManager from '../AnimationManager';
 
 export class Backtracking implements IAlgorithm {
   // This matrix will store the best path found to reach a given cell
   #memoization: Array<Array<number>> = []
   #bestPath: BoardPath = []
-  #moves: Array<ICoordinate>
   #animationDelay: number
-  #beginDistanceToExit: number
 
   constructor() { }
 
@@ -21,18 +18,6 @@ export class Backtracking implements IAlgorithm {
     {
       this.#memoization.push(new Array<number>(board.width).fill(Number.MAX_SAFE_INTEGER))
     }
-    this.#moves = [
-      // { row: 1,  col: -1 }, // down left
-      { row: 1, col: 0 }, // down
-      // { row: 1,  col:  1 }, // down right
-      { row: 0, col: 1 }, // right
-      // { row: -1, col:  1 }, // up right
-      { row: -1, col: 0 }, // up
-      // { row: -1, col: -1 }, // up left
-      { row: 0, col: -1 }, // left
-    ]
-
-    this.#beginDistanceToExit = ManhattanDistance(board.begin, board.exit)
   }
 
   #setMemoization(coord: ICoordinate, value: number) {
@@ -48,7 +33,6 @@ export class Backtracking implements IAlgorithm {
       return false
 
     let optimisticDistance = EuclideanDistance(coord, board.exit) + currentPath.length + 1
-    // if (optimisticDistance > this.#beginDistanceToExit) return false
 
     return optimisticDistance < this.#bestPath.length || this.#bestPath.length === 0
   }
@@ -93,14 +77,11 @@ export class Backtracking implements IAlgorithm {
     }
 
     // Explore surrounding cells
-    currentPath.push({ ...coord })
-    for (let m of this.#moves)
+    for (let m of MOVES)
     {
-      let newCoord = { row: m.row + coord.row, col: m.col + coord.col }
-      this.#solve(board, newCoord, currentPath)
+      let newCoord = { row: coord.row + m.row, col: coord.col + m.col] }
+      this.#solve(board, newCoord, currentPath.concat([coord]))
     }
-
-    currentPath.splice(currentPath.length - 1, 1)
   }
 
   findPath(board: Board, animationDelay: number): BoardPath {
