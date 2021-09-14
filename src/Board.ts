@@ -75,6 +75,10 @@ class Board {
   }
 
   setCellType(row: number, column: number, type: CellType) {
+    if (type == this.#table[row][column])
+    {
+      return
+    }
     if (type == CellType.BEGIN)
     {
       // Only one begin cell is allowed
