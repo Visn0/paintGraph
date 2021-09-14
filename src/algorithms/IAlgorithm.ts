@@ -37,7 +37,7 @@ export function ManhattanDistance(a: ICoordinate, b: ICoordinate): number {
 }
 
 export function validCoord(coord: ICoordinate, maxRow: number, maxCol: number): boolean {
-  return (coord.row < maxRow || coord.row >= 0
-    || coord.col < maxCol || coord.col >= 0)
+  return (coord.row < maxRow && coord.row >= 0
+    && coord.col < maxCol && coord.col >= 0)
 }
 

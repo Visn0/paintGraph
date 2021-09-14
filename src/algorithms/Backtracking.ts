@@ -47,7 +47,7 @@ export class Backtracking implements IAlgorithm {
     if (currentPath.length >= this.#getMemoization(coord) - 1 || (currentPath.length >= this.#bestPath.length && this.#bestPath.length > 0))
       return false
 
-    let optimisticDistance = EuclideanDistance(coord, board.exit) + currentPath.length
+    let optimisticDistance = EuclideanDistance(coord, board.exit) + currentPath.length + 1
     // if (optimisticDistance > this.#beginDistanceToExit) return false
 
     return optimisticDistance < this.#bestPath.length || this.#bestPath.length === 0
