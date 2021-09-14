@@ -44,6 +44,7 @@ function dfs(row: number, column: number, K: number) {
     for (let j = Math.max(0, column - K); j <= Math.min(board.width - 1, column + K); j++)
     {
       board.setCellType(i, j, cellType)
+      // board.setTableCellType(i, j, cellType)
     }
   }
 }
@@ -54,11 +55,11 @@ function validForThickness(type) {
 }
 
 window.onCellClick = (event: Event, row: number, column: number) => {
-  event.preventDefault()
   if (board.getCellType({ row: row, col: column }) === cellType)
   {
     return
   }
+  event.preventDefault()
   if (validForThickness(cellType))
   {
     dfs(row, column, thickness)
@@ -80,10 +81,6 @@ window.onCellDrag = (event: Event, row: number, colum: number) => {
 
 window.onCellOver = (event: Event, row: number, column: number) => {
   event.preventDefault()
-  if (board.getCellType({ row: row, col: column }) === cellType)
-  {
-    return
-  }
   if (validForThickness(cellType))
   {
     dfs(row, column, thickness)

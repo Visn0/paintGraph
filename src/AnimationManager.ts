@@ -2,15 +2,15 @@ import { ICoordinate } from "./algorithms/IAlgorithm";
 import { CellType } from "./CellType";
 
 class AnimationManager {
-  static #animationCounter:  number = 0
+  static #animationCounter: number = 0
 
-  private constructor() {}
+  private constructor() { }
 
   static #getElementByCoord(coord: ICoordinate): HTMLElement {
     return document.getElementById(`cell${coord.row}_${coord.col}`)
   }
 
-  static setExploredCell (coord: ICoordinate, animationDelay: number = 0) {
+  static setExploredCell(coord: ICoordinate, animationDelay: number = 0) {
     let elem = this.#getElementByCoord(coord)
     let prevColor: string = elem.style.backgroundColor ? elem.style.backgroundColor : "rgba(163, 80, 220, 0.20)"
     prevColor = prevColor.split(',')[3]
@@ -18,11 +18,11 @@ class AnimationManager {
     this.#animationCounter += 1
     setTimeout(() => {
       this.#animationCounter -= 1
-      elem.style.backgroundColor = `rgba(163, 80, 255, ${ parseFloat(prevColor) + 0.04 })`
+      elem.style.backgroundColor = `rgba(163, 80, 255, ${parseFloat(prevColor) + 0.04})`
     }, animationDelay + this.#animationCounter)
   }
 
-  static setEmptyCell (coord: ICoordinate) {
+  static setEmptyCell(coord: ICoordinate) {
     let elem = this.#getElementByCoord(coord)
     elem.className = ''
     elem.style.backgroundColor = ''
@@ -34,30 +34,31 @@ class AnimationManager {
     // this.#sleep(animationDelay)
     this.#animationCounter += 1
     setTimeout(() => {
-    this.#animationCounter -= 1
-    switch (type) {
-      case CellType.BEGIN:
-        elem.className = 'bg-primary'
-        break
+      this.#animationCounter -= 1
+      switch (type)
+      {
+        case CellType.BEGIN:
+          elem.className = 'bg-primary'
+          break
 
-      case CellType.WALL:
-        elem.className = 'bg-secondary'
-        break
+        case CellType.WALL:
+          elem.className = 'bg-secondary'
+          break
 
-      case CellType.EXIT:
-        elem.className = 'bg-success'
-        break
+        case CellType.EXIT:
+          elem.className = 'bg-success'
+          break
 
-      case CellType.EMPTY:
-        elem.className = ''
-        elem.style.backgroundColor = ''
-        break
+        case CellType.EMPTY:
+          elem.className = ''
+          elem.style.backgroundColor = ''
+          break
 
-      case CellType.PATH:
-        elem.className = 'bg-danger'
-        break
-    }
-    }, animationDelay + this.#animationCounter)
+        case CellType.PATH:
+          elem.className = 'bg-danger'
+          break
+      }
+    }, 0) //animationDelay + this.#animationCounter
   }
 }
 
