@@ -6,12 +6,12 @@ class AnimationManager {
 
   private constructor() { }
 
-  static #getElementByCoord(coord: ICoordinate): HTMLElement {
+  static getElementByCoord(coord: ICoordinate): HTMLElement {
     return document.getElementById(`cell${coord.row}_${coord.col}`)
   }
 
   static setExploredCell(coord: ICoordinate, animationDelay: number = 0) {
-    let elem = this.#getElementByCoord(coord)
+    let elem = this.getElementByCoord(coord)
     let prevColor: string = elem.style.backgroundColor ? elem.style.backgroundColor : "rgba(163, 80, 220, 0.20)"
     prevColor = prevColor.split(',')[3]
 
@@ -23,13 +23,13 @@ class AnimationManager {
   }
 
   static setEmptyCell(coord: ICoordinate) {
-    let elem = this.#getElementByCoord(coord)
+    let elem = this.getElementByCoord(coord)
     elem.className = ''
     elem.style.backgroundColor = ''
   }
 
   static setCellStyle(coord: ICoordinate, type: CellType, animationDelay: number = 0) {
-    let elem = this.#getElementByCoord(coord)
+    let elem = this.getElementByCoord(coord)
 
     // this.#sleep(animationDelay)
     this.#animationCounter += 1

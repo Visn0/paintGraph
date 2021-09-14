@@ -1,4 +1,4 @@
-import { IAlgorithm, ICoordinate, BoardPath, PitagorasDistance, ManhattanDistance } from './IAlgorithm'
+import { IAlgorithm, ICoordinate, BoardPath, EuclideanDistance, ManhattanDistance } from './IAlgorithm'
 import Board from '../Board'
 import { CellType } from '../CellType';
 import { stringify } from 'querystring';
@@ -47,7 +47,7 @@ export class Backtracking implements IAlgorithm {
     if (currentPath.length >= this.#getMemoization(coord) - 1 || (currentPath.length >= this.#bestPath.length && this.#bestPath.length > 0))
       return false
 
-    let optimisticDistance = PitagorasDistance(coord, board.exit) + currentPath.length
+    let optimisticDistance = EuclideanDistance(coord, board.exit) + currentPath.length
     // if (optimisticDistance > this.#beginDistanceToExit) return false
 
     return optimisticDistance < this.#bestPath.length || this.#bestPath.length === 0
