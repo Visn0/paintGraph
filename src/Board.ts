@@ -46,7 +46,8 @@ class Board {
     return { ...this.#exit }
   }
 
-  getCellType(coord: ICoordinate): CellType {
+  getCellType (coord: ICoordinate): CellType {
+    console.log(coord)
     return this.#table[coord.row][coord.col]
   }
 

@@ -14,7 +14,9 @@ export interface ICoordinate {
   row: number
   col: number
   bound?: number // bound used in A* algorithm to sort the priority queue
-  path?: Array<ICoordinate> // path followed to reach this cell
+  prev?: ICoordinate
+  pathLength?: number
+  // path?: Array<ICoordinate> // path followed to reach this cell
 }
 
 export enum AlgorithmType {

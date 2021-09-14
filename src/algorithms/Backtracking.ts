@@ -43,13 +43,13 @@ export class Backtracking implements IAlgorithm {
     }
 
     if (currCell !== CellType.BEGIN) {
-      AnimationManager.setExploredCell(coord, this.#animationDelay)
+      AnimationManager.setExploredCell(coord)//, this.#animationDelay)
     }
 
     // Explore surrounding cells
     for (let m of MOVES)
     {
-      let newCoord = { row: coord.row + m.row, col: coord.col + m.col] }
+      let newCoord = { row: coord.row + m.row, col: coord.col + m.col }
       this.#solve(board, newCoord, currentPath.concat([coord]))
     }
   }

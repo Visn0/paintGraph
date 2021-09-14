@@ -27,6 +27,7 @@
   ],
   "dependencies": {
     "@popperjs/core": "^2.10.1",
-    "src": "^1.1.2"
+    "src": "^1.1.2",
+    "ts-priority-queue": "^0.1.1"
   }
 }
