@@ -43,14 +43,17 @@ class AnimationManager {
       {
         case CellType.BEGIN:
           elem.className = 'bg-primary'
+          elem.style.backgroundColor = ''
           break
 
         case CellType.WALL:
           elem.className = 'bg-secondary'
+          elem.style.backgroundColor = ''
           break
 
         case CellType.EXIT:
           elem.className = 'bg-success'
+          elem.style.backgroundColor = ''
           break
 
         case CellType.EMPTY:
@@ -60,6 +63,7 @@ class AnimationManager {
 
         case CellType.PATH:
           elem.className = 'bg-danger'
+          elem.style.backgroundColor = ''
           break
       }
     }, this.#getDelay(animationDelay))
