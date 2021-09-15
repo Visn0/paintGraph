@@ -15,13 +15,42 @@
   </head>
 
   <body>
+    <!-- Modal -->
+    <div id="modal" class="modal" tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header">
+            <h5 id="modal-title" class="modal-title">Modal title</h5>
+            <button id="close-modal" type="button" class="btn-close btn-close-white" data-dismiss="modal"
+              aria-label="Close">
+              <!-- <span aria-hidden="true">&times;</span> -->
+            </button>
+          </div>
+          <div id="modal-body" class="modal-body">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <span id="close-modal" class="close">&times;</span>
+        <p id="modal-title" class="modal-title"></p>
+        <p id="modal-body" class="modal-body"></p>
+      </div>
+    </div>
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container">
         <ul class="navbar-nav">
+
+          <!-- Run button -->
           <li class="nav-item">
             <button id="run-btn"
               class="btn btn-primary btn-lg text-white nav-link my-1 mx-0 p-3 px-5 w-100">Run</button>
           </li>
+
+          <!-- Algorithms -->
           <li class="nav-item dropdown">
             <button class="btn btn-secondary btn-lg text-white nav-link dropdown-toggle m-1 ml-2 p-3"
               id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -41,6 +70,7 @@
           </li>
         </ul>
 
+        <!-- Cell types for drawing -->
         <ul class="navbar-nav m-auto">
           <li class="nav-item">
             <button id="begin-btn" class="btn btn-primary btn-lg text-white nav-link m-1 p-3" ">Begin cell</button>
@@ -63,6 +93,7 @@
           </li>
         </ul>
 
+        <!-- Clear map button -->
         <ul class="navbar-nav">
           <li class="nav-item">
             <button id="clear-map-btn" class="btn btn-danger btn-lg text-white nav-link m-1 p-3">Clear map</button>
@@ -71,13 +102,12 @@
       </div>
     </nav>
 
+    <!-- Board -->
     <table id="board"></table>
-
 
     <!-- Path finding -->
     <script src="src/constants.ts"></script>
     <script src="index.ts"></script>
-
 
     <!-- Bootstrap -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

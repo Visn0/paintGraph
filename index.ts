@@ -7,7 +7,7 @@ import { AlgorithmType, CellType } from './src/constants';
 // ################################################
 // ### VARIABLES
 // ################################################
-
+const modal: HTMLElement = document.getElementById('modal')
 let board: Board = null
 let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
@@ -119,12 +119,12 @@ document.getElementById('a-star-btn').onclick = (event: Event) => {
 // Run algorithm button
 document.getElementById('run-btn').onclick = (event: Event) => {
   if (!board.isThereBegin) {
-    console.log('Missing beginning cell.')
+    showModal('ERROR', "Missing beginning cell.")
     return
   }
 
   if (!board.isThereExit) {
-    console.log('Missing exit cell.')
+    showModal('ERROR', "Missing exit cell.")
     return
   }
 
@@ -132,8 +132,35 @@ document.getElementById('run-btn').onclick = (event: Event) => {
 
   console.log(`Executing algorihm`)
   const path: BoardPath = algorithm.findPath(board, animationDelay)
+  if (path.length === 0) {
+    showModal('Uuups!', 'There are not paths.')
+  }
+
   for (let i = 0; i < path.length - 1; i++) {
     AnimationManager.setCellStyle(path[i], CellType.PATH, animationDelay)
   }
   console.log(`Finished algorihm`)
+}
+
+// ################################################
+// ### MODAL EVENTS AND FUNCTIONS
+// ################################################
+document.getElementById('close-modal').onclick = hideModal
+document.getElementById('modal').onclick = hideModal
+
+function showModal (title: string, body: string) {
+  console.log(title, body)
+  let elemTitle = document.getElementById('modal-title')
+  elemTitle.innerText = title
+
+  let elemBody = document.getElementById('modal-body')
+  elemBody.innerText = body
+
+  modal.style.display = 'block'
+  modal.classList.add('show')
+}
+
+function hideModal () {
+  modal.style.display = 'none'
+  modal.classList.remove('show')
 }
