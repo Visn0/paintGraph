@@ -69,6 +69,20 @@ class Board {
     this.#exit = null
   }
 
+  clearExploredNodes () {
+    for (let r = 0; r < this.#rows; r++)
+    {
+      for (let c = 0; c < this.#columns; c++)
+      {
+        if (this.#table[r][c] === CellType.BEGIN || this.#table[r][c] === CellType.EXIT || this.#table[r][c] === CellType.WALL)
+          continue
+
+        AnimationManager.setEmptyCell({ row: r, col: c })
+        this.#table[r][c] = CellType.EMPTY
+      }
+    }
+  }
+
   setTableCellType(row: number, column: number, type: CellType) {
     AnimationManager.setCellStyle({ row: row, col: column }, type)
     this.#table[row][column] = type

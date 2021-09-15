@@ -96,6 +96,8 @@ window.runAlgorithm = (event: Event) => {
     return
   }
 
+  board.clearExploredNodes()
+
   console.log(`Executing algorihm`)
   const path: BoardPath = algorithm.findPath(board, animationDelay)
   for (let i = 0; i < path.length - 1; i++) {
