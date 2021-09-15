@@ -1,4 +1,3 @@
-import { type } from "os"
 import { ICoordinate } from "./algorithms/IAlgorithm"
 import AnimationManager from './AnimationManager'
 import { CellType } from "./CellType"

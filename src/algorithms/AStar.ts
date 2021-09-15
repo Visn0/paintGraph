@@ -11,14 +11,6 @@ export class AStar implements IAlgorithm {
 
   constructor () { }
 
-  #sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-      currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-  }
-
   #init(board: Board) {
     this.#bestPath = []
     this.#memoization = new Array<Array<number>>()

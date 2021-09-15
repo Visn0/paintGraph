@@ -57,14 +57,14 @@ export class BranchAndBound implements IAlgorithm {
         pathLength: coord.pathLength + 1,
         prev: coord
       }
-      this.#solve(board, newCoord) //, currentPath.concat([coord]))
+      this.#solve(board, newCoord)
     }
   }
 
   findPath(board: Board, animationDelay: number): BoardPath {
     this.#init(board)
     this.#animationDelay = animationDelay
-    this.#solve(board, { ...board.begin, pathLength: 0, prev: null })//, [])
+    this.#solve(board, { ...board.begin, pathLength: 0, prev: null })
 
     return this.#bestPath
   }

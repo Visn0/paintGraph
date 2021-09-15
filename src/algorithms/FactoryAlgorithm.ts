@@ -10,7 +10,6 @@ const algorithms: Map<AlgorithmType, IAlgorithm> = new Map<AlgorithmType, IAlgor
 ])
 
 export function FactoryAlgorithm(algorithmType: AlgorithmType): IAlgorithm {
-  // let res: IAlgorithm
   console.log(algorithmType)
   console.log(algorithms.get(algorithmType))
   return algorithms.get(algorithmType)
