@@ -12,7 +12,7 @@ let board: Board = null
 let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
-let animationDelay: number = 500
+let animationDelay: number = 200
 
 function init() {
   thickness = parseInt(document.getElementById('thickness').value)
@@ -21,8 +21,6 @@ function init() {
   let cols: number = rows * 2;
   board = new Board(rows, cols)
   board.init()
-
-  animationDelay /= rows
 }
 
 function dfs(row: number, column: number, K: number) {

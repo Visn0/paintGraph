@@ -15,8 +15,8 @@ class PriorityQueue<T> {
 
     for (let i = 0; i < this.#data.length; i++) {
       if (this.#comparator(item, this.#data[i])) {
-        console.log(item)
-        this.#data.splice(i+1, 0, JSON.parse(JSON.stringify(item)))
+        this.#data.splice(i + 1, 0, JSON.parse(JSON.stringify(item)))
+        console.log(this.#data)
         break
       }
     }
@@ -31,6 +31,10 @@ class PriorityQueue<T> {
 
   empty (): boolean {
     return this.#data.length === 0
+  }
+
+  get data () {
+    return this.#data
   }
 }
 

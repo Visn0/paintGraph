@@ -1,6 +1,6 @@
 import { IAlgorithm, ICoordinate, BoardPath, compareCoords, ManhattanDistance, MOVES, validCoord } from './IAlgorithm'
 import Board from '../Board'
-import PriorityQueue from '../data_structures/PriorityQueue'
+import PriorityQueue from 'ts-priority-queue'
 import { CellType } from '../CellType'
 import AnimationManager from '../AnimationManager'
 
@@ -10,6 +10,14 @@ export class AStar implements IAlgorithm {
   #animationDelay: number
 
   constructor () { }
+
+  #sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
 
   #init(board: Board) {
     this.#bestPath = []
@@ -22,28 +30,24 @@ export class AStar implements IAlgorithm {
 
   #isCellPromising (coord: ICoordinate): boolean {
     return coord.pathLength < this.#memoization[coord.row][coord.col]
-      || (coord.bound < this.#bestPath.length
-      && this.#bestPath.length > 0)
+      // || this.#bestPath.length === 0
+      && (coord.bound < this.#bestPath.length || this.#bestPath.length === 0)
   }
 
   #solve(board: Board) {
-    let pq = new PriorityQueue<ICoordinate>(compareCoords)
+    let pq = new PriorityQueue({ comparator: (a: ICoordinate, b: ICoordinate) => { return a.bound - b.bound } })
     let bound: number = ManhattanDistance(board.begin, board.exit)
     let coord: ICoordinate = { ...board.begin, bound: bound, pathLength: 0, prev: null }
 
-    pq.push(coord)
+    pq.queue(coord)
 
-    let iterations: number = 40000
-    while (!pq.empty() && iterations > 0) {
-      if (this.#bestPath.length > 0) break
-      iterations -= 1
-
-      let coord: ICoordinate = pq.pop()
-      this.#memoization[coord.row][coord.col] = coord.pathLength
+    while (pq.length !== 0)  {
+      let coord: ICoordinate = pq.dequeue()
       AnimationManager.setExploredCell(coord, this.#animationDelay)
 
-      // if (!this.#isCellPromising(coord)) continue
+      if (!this.#isCellPromising(coord)) continue
 
+      this.#memoization[coord.row][coord.col] = coord.pathLength
       if (board.getCellType(coord) === CellType.EXIT) {
         if (coord.pathLength < this.#bestPath.length || this.#bestPath.length === 0) {
           this.#bestPath = new Array<ICoordinate>(coord.pathLength)
@@ -70,9 +74,9 @@ export class AStar implements IAlgorithm {
         if (board.getCellType(newCoord) === CellType.WALL)
           continue
 
-        newCoord.bound = coord.pathLength + ManhattanDistance(newCoord, board.exit)
+        newCoord.bound = coord.pathLength + ManhattanDistance(newCoord, board.exit) + 1
         if (this.#isCellPromising(newCoord)) {
-          pq.push(newCoord)
+          pq.queue(newCoord)
         }
       }
     }
