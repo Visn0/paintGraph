@@ -1,0 +1,65 @@
+##### LABERINTO EN JS PARA VISUALIZAR ALGORITMOS PATHFINDING #####
+
+### REQUERIMIENTOS ###
+1. Dibujar malla de RxC celdas, sindo R y C tamaños variables indicados por el usuario.
+2. El usuario debe poder elegir 3 tipos de celdas: inicio, final, muro
+	- Celda de inicio en laberinto [1, 1].
+		- El usuario debe poder moverlo sin necesidad de Borrar y Redibujar manualmente.
+	- Celda de inicio en laberinto [1, N).
+		- El usuario debe poder moverlo sin necesidad de Borrar y Redibujar manualmente.
+	- Celda de muro (0, N).
+		- El usuario debe poder clicar y manteniendo pulsado arrastrar por toda la malla dibujando los muros sobre todas las celdas por las que pase el ratón hasta dejar de clicar.
+
+3. El usuario debe poder borrar cualquier celda, dejandola como "espacio vacío".
+4. El usuario debe poder elegir entre una lista de algoritmos cuál es el que quiere utilizar (back tracking, A*, etc.)
+5. El usuario puede con un solo botón limpiar todas las celdas, dejandolas como "espacio vacío".
+6. El usuario debe poder iniciar la ejecución del algoritmo con un solo clic a un botón:
+	- Solo debe ser posible comenzar la ejecución si en la malla existen a la vez el punto de inicio y al menos un punto de salida.
+	- Si no se cumplen las condiciones de inicio, mostrar un modal al usuario indicándole que debe hacer para que funcione (e.g. poner el punto de inicio o salida).
+	- Al comenzar la ejecución, el botón de "Run" pasa a ser "Stop" y viceversa.
+	- Una vez haya terminado la ejecución de un algoritmo y esté en la malla la representación de la busqueda del camino, el usuario podrá reiniciar la busqueda sin necesidad de modificar o rehacer el laberinto. Para ello deberán "limpiarse de pantalla" las busquedad del camino, manteniendo los muros y puntos entrada/salida.
+
+7. El usuario debe poder detener la ejecución del algoritmo en cualquier momento.
+
+
+# Tareas
+
+## Clases
+
+
+################################################
+### Board
+################################################
+- height, width 
+- celdas[][]
+- modo
+_____________
+- clearMap()
+- setCell()
+- setColorXY()
+
+################################################
+### Celda
+################################################
+- elem
+- fila, col
+- color/type // tipo de celda
+________________
+- setType()
+
+################################################
+### Factoria algoritmos
+################################################
+
+
+
+
+
+
+
+____________________________________________________________-
+- Poner las celdas
+- Rellenar de color las celdas por las que se arrastra (cuando se esta en modo muro)
+- Seleccionar inicio (cuando se esta en modo inicio)
+- Seleccionar final (cuando se esta en modo final)
+- 
