@@ -19,8 +19,8 @@
       <div class="container">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <button id="run-btn" class="btn btn-primary btn-lg text-white nav-link my-1 mx-0 p-3 px-5 w-100"
-              onclick="runAlgorithm(event)">Run</button>
+            <button id="run-btn"
+              class="btn btn-primary btn-lg text-white nav-link my-1 mx-0 p-3 px-5 w-100">Run</button>
           </li>
           <li class="nav-item dropdown">
             <button class="btn btn-secondary btn-lg text-white nav-link dropdown-toggle m-1 ml-2 p-3"
@@ -28,13 +28,13 @@
               A Star (A*)
             </button>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <button class="btn btn-lg dropdown-item" onclick="setAlgorithm(event, AlgorithmType.BACKTRACKING)">
+              <button id="backtracking-btn" class="btn btn-lg dropdown-item">
                 Backtracking
               </button>
-              <button class="btn btn-lg dropdown-item" onclick="setAlgorithm(event, AlgorithmType.BRANCH_AND_BOUND)">
+              <button id="branch-and-bound-btn" class="btn btn-lg dropdown-item">
                 Branch and bound
               </button>
-              <button class="btn btn-lg dropdown-item" onclick="setAlgorithm(event, AlgorithmType.A_STAR)">
+              <button id="a-star-btn" class="btn btn-lg dropdown-item">
                 A Star (A*)
               </button>
             </div>
@@ -43,34 +43,29 @@
 
         <ul class="navbar-nav m-auto">
           <li class="nav-item">
-            <button class="btn btn-primary btn-lg text-white nav-link m-1 p-3"
-              onclick="setCellToDraw(event, CellType.BEGIN)">Begin cell</button>
+            <button id="begin-btn" class="btn btn-primary btn-lg text-white nav-link m-1 p-3" ">Begin cell</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-dark btn-lg text-white nav-link m-1 p-3"
-              onclick="setCellToDraw(event, CellType.WALL)">Wall cell</button>
+          <li class=" nav-item">
+              <button id="wall-btn" class="btn btn-dark btn-lg text-white nav-link m-1 p-3" ">Wall cell</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-success btn-lg text-white nav-link m-1 p-3"
-              onclick="setCellToDraw(event, CellType.EXIT)">Exit cell</button>
+          <li class=" nav-item">
+                <button id="exit-btn" class="btn btn-success btn-lg text-white nav-link m-1 p-3" ">Exit cell</button>
           </li>
-          <li class="nav-item">
-            <button class="btn btn-outline-dark btn-lg text-dark nav-link m-1 p-3"
-              onclick="setCellToDraw(event, CellType.EMPTY)">Empty cell</button>
+          <li class=" nav-item">
+                  <button id="empty-btn" class="btn btn-outline-dark btn-lg text-dark nav-link m-1 p-3" ">Empty cell</button>
           </li>
-          <li class="nav-item" style="padding-left: 5px; text-align: center;">
-            <label id="thickness_label" class="form-label">Thickness:</label>
-            <label id="thickness_label_value" class="form-label">1</label>
-            <br>
-            <input id="thickness" type="range" class="form-range" name="thickness" min=1 max=5 value=1
-              style="width: 80%;" onchange="setThickness(event)">
+          <li class=" nav-item" style="padding-left: 5px; text-align: center;">
+                    <label id="thickness_label" class="form-label">Thickness:</label>
+                    <label id="thickness_label_value" class="form-label">1</label>
+                    <br>
+                    <input id="thickness" type="range" class="form-range" name="thickness" min=1 max=5 value=1
+                      style="width: 80%;">
           </li>
         </ul>
 
         <ul class="navbar-nav">
           <li class="nav-item">
-            <button class="btn btn-danger btn-lg text-white nav-link m-1 p-3" onclick="clearBoard(event)">Clear
-              map</button>
+            <button id="clear-map-btn" class="btn btn-danger btn-lg text-white nav-link m-1 p-3">Clear map</button>
           </li>
         </ul>
       </div>
@@ -80,6 +75,7 @@
 
 
     <!-- Path finding -->
+    <script src="src/constants.ts"></script>
     <script src="index.ts"></script>
 
 

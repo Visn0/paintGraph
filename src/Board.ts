@@ -1,6 +1,6 @@
 import { ICoordinate } from "./algorithms/IAlgorithm"
 import AnimationManager from './AnimationManager'
-import { CellType } from "./CellType"
+import { CellType } from "./constants"
 
 class Board {
   #element: HTMLElement = null

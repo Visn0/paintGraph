@@ -1,5 +1,6 @@
 import { ICoordinate } from "./algorithms/IAlgorithm";
-import { CellType } from "./CellType";
+// import { CellType } from "./CellType";
+import { CellType } from './constants'
 
 class AnimationManager {
   static #animationCounter: number = 0

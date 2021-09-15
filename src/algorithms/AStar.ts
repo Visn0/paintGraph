@@ -1,8 +1,8 @@
-import { IAlgorithm, ICoordinate, BoardPath, compareCoords, ManhattanDistance, MOVES, validCoord, getPath } from './IAlgorithm'
+import { IAlgorithm, ICoordinate, BoardPath, compareCoords, ManhattanDistance, validCoord, getPath } from './IAlgorithm'
 import Board from '../Board'
 import PriorityQueue from 'ts-priority-queue'
-import { CellType } from '../CellType'
 import AnimationManager from '../AnimationManager'
+import { CellType, MOVES } from '../constants'
 
 export class AStar implements IAlgorithm {
   #memoization: Array<Array<number>> = []

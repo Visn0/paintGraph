@@ -1,7 +1,7 @@
-import { IAlgorithm, ICoordinate, BoardPath, EuclideanDistance, MOVES, validCoord, ManhattanDistance, getPath } from './IAlgorithm'
+import { IAlgorithm, ICoordinate, BoardPath, EuclideanDistance, validCoord, ManhattanDistance, getPath } from './IAlgorithm'
 import Board from '../Board'
-import { CellType } from '../CellType';
 import AnimationManager from '../AnimationManager';
+import { CellType, MOVES } from '../constants'
 
 export class BranchAndBound implements IAlgorithm {
   // This matrix will store the best path found to reach a given cell

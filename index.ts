@@ -1,12 +1,10 @@
 import { FactoryAlgorithm } from './src/algorithms/FactoryAlgorithm';
-import { AlgorithmType, BoardPath, IAlgorithm, moves } from './src/algorithms/IAlgorithm';
+import { BoardPath, IAlgorithm } from './src/algorithms/IAlgorithm';
 import AnimationManager from './src/AnimationManager';
 import Board from './src/Board';
-import { CellType } from './src/CellType';
+import { AlgorithmType, CellType } from './src/constants';
 
 window.onload = init
-window.CellType = CellType
-window.AlgorithmType = AlgorithmType
 
 let board: Board = null
 let cellType: CellType = CellType.EMPTY
@@ -21,6 +19,10 @@ function init() {
   board = new Board(rows, cols)
   board.init()
 }
+
+// ################################################
+// ### DRAWING EVENTS AND FUNCTIONS
+// ################################################
 
 function dfs(row: number, column: number, K: number) {
   K = parseInt(K - 1)
@@ -67,11 +69,15 @@ window.onCellOver = (event: Event, row: number, column: number) => {
   }
 }
 
-window.setCellToDraw = (event: Event, type: CellType) => {
-  cellType = type
-}
-
-window.setThickness = (event: Event) => {
+// ################################################
+// ### CELL TYPE DRAWING BUTTONS
+// ################################################
+document.getElementById('begin-btn').onclick = (event: Event) => cellType = CellType.BEGIN
+document.getElementById('wall-btn').onclick = (event: Event) => cellType = CellType.WALL
+document.getElementById('exit-btn').onclick = (event: Event) => cellType = CellType.EXIT
+document.getElementById('empty-btn').onclick = (event: Event) => cellType = CellType.EMPTY
+document.getElementById('clear-map-btn').onclick = (event: Event) => board.clear()
+document.getElementById('thickness').onchange = (event: Event) => {
   thickness = parseInt(event.target.value)
 
   let elemValueThickness = document.getElementById('thickness_label_value')
@@ -79,20 +85,42 @@ window.setThickness = (event: Event) => {
   console.log(event.target.value)
 }
 
-window.clearBoard = (event: Event) => {
-  board.clear()
-}
 
-window.setAlgorithm = (event: Event, algorithmType: AlgorithmType) => {
-  algorithm = FactoryAlgorithm(algorithmType)
-
+// ################################################
+// ### ALGORITHM SELECTION BUTTONS
+// ################################################
+function setAlgorithmBtn (innerText: string) {
   let elem = document.getElementById('navbarDropdown')
-  elem.innerText = algorithmType
+  elem.innerText = innerText
 }
 
-window.runAlgorithm = (event: Event) => {
-  if (!board.isThereBegin || !board.isThereExit) {
-    console.log('Missing beginning or exit.')
+// Backtracking button
+document.getElementById('backtracking-btn').onclick = (event: Event) => {
+  algorithm = FactoryAlgorithm(AlgorithmType.BACKTRACKING)
+  setAlgorithmBtn(AlgorithmType.BACKTRACKING)
+}
+
+// Branch and Bound button
+document.getElementById('branch-and-bound-btn').onclick = (event: Event) => {
+  algorithm = FactoryAlgorithm(AlgorithmType.BRANCH_AND_BOUND)
+  setAlgorithmBtn(AlgorithmType.BRANCH_AND_BOUND)
+}
+
+// A Star button
+document.getElementById('a-star-btn').onclick = (event: Event) => {
+  algorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
+  setAlgorithmBtn(AlgorithmType.A_STAR)
+}
+
+// Run algorithm button
+document.getElementById('run-btn').onclick = (event: Event) => {
+  if (!board.isThereBegin) {
+    console.log('Missing beginning cell.')
+    return
+  }
+
+  if (!board.isThereExit) {
+    console.log('Missing exit cell.')
     return
   }
 

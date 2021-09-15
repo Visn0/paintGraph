@@ -1,7 +1,7 @@
-import { IAlgorithm, ICoordinate, BoardPath, validCoord, MOVES, getPath } from './IAlgorithm'
+import { IAlgorithm, ICoordinate, BoardPath, validCoord, getPath } from './IAlgorithm'
 import Board from '../Board'
-import { CellType } from '../CellType';
 import AnimationManager from '../AnimationManager';
+import { CellType, MOVES } from '../constants'
 
 export class Backtracking implements IAlgorithm {
   #memoization: Array<Array<number>> = []

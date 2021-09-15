@@ -1,7 +1,8 @@
 import { Backtracking } from "./Backtracking";
 import { BranchAndBound } from "./BranchAndBound";
 import { AStar } from "./AStar";
-import { AlgorithmType, IAlgorithm } from "./IAlgorithm";
+import { IAlgorithm } from "./IAlgorithm";
+import { AlgorithmType } from "../constants";
 
 const algorithms: Map<AlgorithmType, IAlgorithm> = new Map<AlgorithmType, IAlgorithm>([
   [AlgorithmType.BACKTRACKING, new Backtracking()],
