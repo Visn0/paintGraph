@@ -17,32 +17,16 @@ let animationDelay: number = 3
 function init() {
   thickness = parseInt(document.getElementById('thickness').value)
   let rows: number = 50;
-  // let rows: number = 10;
   let cols: number = rows * 2;
   board = new Board(rows, cols)
   board.init()
 }
 
 function dfs(row: number, column: number, K: number) {
-  // if (K <= 0 || cellType === board.getCellType({ row: row, col: column }))
-  // {
-  //   return;
-  // }
-
-  // board.setCellType(row, column, cellType)
-  // moves.forEach(move => {
-  //   dfs(row + move[0], column + move[1], K - 1)
-  // });
   K = parseInt(K - 1)
-
-  // console.log(row, column, K)
-  // console.log(Math.min(board.height, row + K), Math.min(board.width, column + K))
-  for (let i = Math.max(0, row - K); i <= Math.min(board.height - 1, row + K); i++)
-  {
-    for (let j = Math.max(0, column - K); j <= Math.min(board.width - 1, column + K); j++)
-    {
+  for (let i = Math.max(0, row - K); i <= Math.min(board.height - 1, row + K); i++) {
+    for (let j = Math.max(0, column - K); j <= Math.min(board.width - 1, column + K); j++) {
       board.setCellType(i, j, cellType)
-      // board.setTableCellType(i, j, cellType)
     }
   }
 }
@@ -53,17 +37,13 @@ function validForThickness(type) {
 }
 
 window.onCellClick = (event: Event, row: number, column: number) => {
-  if (board.getCellType({ row: row, col: column }) === cellType)
-  {
-    return
-  }
   event.preventDefault()
-  if (validForThickness(cellType))
-  {
+
+  if (board.getCellType({ row: row, col: column }) === cellType) return
+
+  if (validForThickness(cellType)) {
     dfs(row, column, thickness)
-  }
-  else
-  {
+  } else {
     board.setCellType(row, column, cellType)
   }
 }
@@ -79,12 +59,10 @@ window.onCellDrag = (event: Event, row: number, colum: number) => {
 
 window.onCellOver = (event: Event, row: number, column: number) => {
   event.preventDefault()
-  if (validForThickness(cellType))
-  {
+
+  if (validForThickness(cellType)) {
     dfs(row, column, thickness)
-  }
-  else
-  {
+  } else {
     board.setCellType(row, column, cellType)
   }
 }
@@ -113,16 +91,14 @@ window.setAlgorithm = (event: Event, algorithmType: AlgorithmType) => {
 }
 
 window.runAlgorithm = (event: Event) => {
-  if (!board.isThereBegin || !board.isThereExit)
-  {
+  if (!board.isThereBegin || !board.isThereExit) {
     console.log('Missing beginning or exit.')
     return
   }
 
   console.log(`Executing algorihm`)
   const path: BoardPath = algorithm.findPath(board, animationDelay)
-  for (let i = 0; i < path.length - 1; i++)
-  {
+  for (let i = 0; i < path.length - 1; i++) {
     AnimationManager.setCellStyle(path[i], CellType.PATH, animationDelay)
   }
   console.log(`Finished algorihm`)
