@@ -1,4 +1,4 @@
-import { IAlgorithm, ICoordinate, BoardPath, validCoord, MOVES } from './IAlgorithm'
+import { IAlgorithm, ICoordinate, BoardPath, validCoord, MOVES, getPath } from './IAlgorithm'
 import Board from '../Board'
 import { CellType } from '../CellType';
 import AnimationManager from '../AnimationManager';
@@ -20,44 +20,44 @@ export class Backtracking implements IAlgorithm {
     }
   }
 
-  #solve (board: Board, coord: ICoordinate, currentPath: BoardPath) {
-    // if (this.#bestPath.length > 0) return
+  #solve (board: Board, coord: ICoordinate) {
+    // Check if coord is inside the board
+    if (!validCoord(coord, board.height, board.width)) return
 
-    // Is inside the board
-    if (!validCoord(coord, board.height, board.width)) return;
+    const currentCell = board.getCellType(coord)
+    if (currentCell === CellType.WALL) return
 
-    const currCell = board.getCellType(coord)
-    // Is not a wall neither start
-    if (currCell === CellType.WALL) return;
-    // We found better path to current coordinate
-    if (this.#memoization[coord.row][coord.col] <= (currentPath.length + 1)) return;
+    // Render the explorated paths
+    if (currentCell !== CellType.BEGIN && currentCell !== CellType.EXIT)
+      AnimationManager.setExploredCell(coord, this.#animationDelay)
 
-    this.#memoization[coord.row][coord.col] = (currentPath.length + 1);
+    if(coord.pathLength >= this.#memoization[coord.row][coord.col]) return
 
-    if (currCell === CellType.EXIT)
+    this.#memoization[coord.row][coord.col] = coord.pathLength
+
+    if (currentCell === CellType.EXIT)
     {
-      // Deep copy
-      this.#bestPath = JSON.parse(JSON.stringify(currentPath));
-      this.#bestPath.push({ ...coord })
+      this.#bestPath = getPath(coord)
       return
-    }
-
-    if (currCell !== CellType.BEGIN) {
-      AnimationManager.setExploredCell(coord)//, this.#animationDelay)
     }
 
     // Explore surrounding cells
     for (let m of MOVES)
     {
-      let newCoord = { row: coord.row + m.row, col: coord.col + m.col }
-      this.#solve(board, newCoord, currentPath.concat([coord]))
+      let newCoord = {
+        row: coord.row + m.row,
+        col: coord.col + m.col,
+        pathLength: coord.pathLength + 1,
+        prev: coord
+      }
+      this.#solve(board, newCoord) //, currentPath.concat([coord]))
     }
   }
 
   findPath(board: Board, animationDelay: number): BoardPath {
     this.#init(board)
     this.#animationDelay = animationDelay
-    this.#solve(board, board.begin, [])
+    this.#solve(board, { ...board.begin, pathLength: 0, prev: null })
     return this.#bestPath
   }
 }
