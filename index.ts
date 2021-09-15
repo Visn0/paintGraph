@@ -4,7 +4,9 @@ import AnimationManager from './src/AnimationManager';
 import Board from './src/Board';
 import { AlgorithmType, CellType } from './src/constants';
 
-window.onload = init
+// ################################################
+// ### VARIABLES
+// ################################################
 
 let board: Board = null
 let cellType: CellType = CellType.EMPTY
@@ -12,7 +14,10 @@ let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
 let animationDelay: number = 3
 
-function init() {
+// ################################################
+// ### WINDOW INIT
+// ################################################
+window.onload = () => {
   thickness = parseInt(document.getElementById('thickness').value)
   let rows: number = 50;
   let cols: number = rows * 2;
@@ -23,7 +28,6 @@ function init() {
 // ################################################
 // ### DRAWING EVENTS AND FUNCTIONS
 // ################################################
-
 function dfs(row: number, column: number, K: number) {
   K = parseInt(K - 1)
   for (let i = Math.max(0, row - K); i <= Math.min(board.height - 1, row + K); i++) {
