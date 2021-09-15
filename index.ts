@@ -12,7 +12,7 @@ let board: Board = null
 let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
-let animationDelay: number = 200
+let animationDelay: number = 3
 
 function init() {
   thickness = parseInt(document.getElementById('thickness').value)

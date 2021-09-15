@@ -6,6 +6,10 @@ class AnimationManager {
 
   private constructor() { }
 
+  static #getDelay (animationDelay: number) {
+    return animationDelay * this.#animationCounter
+  }
+
   static getElementByCoord(coord: ICoordinate): HTMLElement {
     return document.getElementById(`cell${coord.row}_${coord.col}`)
   }
@@ -19,7 +23,7 @@ class AnimationManager {
       let prevColor: string = elem.style.backgroundColor ? elem.style.backgroundColor : "rgba(163, 80, 220, 0.20)"
       prevColor = prevColor.split(',')[3]
       elem.style.backgroundColor = `rgba(163, 80, 255, ${parseFloat(prevColor) + 0.04})`
-    }, animationDelay + this.#animationCounter)
+    }, this.#getDelay(animationDelay))
   }
 
   static setEmptyCell(coord: ICoordinate) {
@@ -58,7 +62,7 @@ class AnimationManager {
           elem.className = 'bg-danger'
           break
       }
-    }, animationDelay + this.#animationCounter)
+    }, this.#getDelay(animationDelay))
   }
 }
 
