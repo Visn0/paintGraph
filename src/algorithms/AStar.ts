@@ -1,7 +1,6 @@
 import { IAlgorithm, ICoordinate, BoardPath, compareCoords, ManhattanDistance, MOVES, validCoord } from './IAlgorithm'
 import Board from '../Board'
-// import PriorityQueue from '../data_structures/PriorityQueue'
-import PriorityQueue from 'ts-priority-queue'
+import PriorityQueue from '../data_structures/PriorityQueue'
 import { CellType } from '../CellType'
 import AnimationManager from '../AnimationManager'
 
@@ -28,22 +27,19 @@ export class AStar implements IAlgorithm {
   }
 
   #solve(board: Board) {
-    let pq = new PriorityQueue({ comparator: (a, b) => { return compareCoords(a, b)} } )
+    let pq = new PriorityQueue<ICoordinate>(compareCoords)
     let bound: number = ManhattanDistance(board.begin, board.exit)
-    let coord: ICoordinate = { ...board.begin, bound: bound, pathLength: 0, prev: null}
-    // let path: BoardPath = [coord]
-    // coord.path = path
+    let coord: ICoordinate = { ...board.begin, bound: bound, pathLength: 0, prev: null }
 
-    pq.queue(coord)
+    pq.push(coord)
 
-    let iterations: number = 100
-    while (pq.length !== 0 && iterations > 0) {
+    let iterations: number = 40000
+    while (!pq.empty() && iterations > 0) {
       if (this.#bestPath.length > 0) break
       iterations -= 1
-      // console.log(JSON.parse(JSON.stringify(pq)))
 
-      let coord: ICoordinate = pq.dequeue()
-      // console.log(JSON.parse(JSON.stringify(coord)))
+      let coord: ICoordinate = pq.pop()
+      this.#memoization[coord.row][coord.col] = coord.pathLength
       AnimationManager.setExploredCell(coord, this.#animationDelay)
 
       // if (!this.#isCellPromising(coord)) continue
@@ -51,15 +47,11 @@ export class AStar implements IAlgorithm {
       if (board.getCellType(coord) === CellType.EXIT) {
         if (coord.pathLength < this.#bestPath.length || this.#bestPath.length === 0) {
           this.#bestPath = new Array<ICoordinate>(coord.pathLength)
-          this.#bestPath[coord.pathLength-1] = { row: coord.row, col: coord.col }
+          this.#bestPath[coord.pathLength-1] = { ...coord }
 
-          for (let i = coord.pathLength - 2; i > 0; i--) {
-            // coord = coord.prev
-            // console.log(JSON.parse(JSON.stringify(coord)))
-            this.#bestPath[i] = this.#bestPath[i+1].prev // { row: coord.row, col: coord.col }
+          for (let i = coord.pathLength - 2; i >= 0; i--) {
+            this.#bestPath[i] = this.#bestPath[i+1].prev
           }
-          // this.#bestPath = JSON.parse(JSON.stringify(coord.path))
-          // this.#bestPath = coord.path.concat([])
         }
         continue
       }
@@ -70,8 +62,7 @@ export class AStar implements IAlgorithm {
           row: coord.row + m.row,
           col: coord.col + m.col,
           pathLength: coord.pathLength + 1,
-          prev: coord
-          // path: JSON.parse(JSON.stringify(coord.path)) // coord.path
+          prev: coord,
         }
 
         if (!validCoord(newCoord, board.height, board.width)) continue
@@ -80,10 +71,8 @@ export class AStar implements IAlgorithm {
           continue
 
         newCoord.bound = coord.pathLength + ManhattanDistance(newCoord, board.exit)
-
         if (this.#isCellPromising(newCoord)) {
-          // newCoord.path = coord.path.concat([{ row: coord.row, col: coord.col }])
-          pq.queue(newCoord)
+          pq.push(newCoord)
         }
       }
     }

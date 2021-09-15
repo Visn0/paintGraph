@@ -12,7 +12,7 @@ let board: Board = null
 let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
-let animationDelay: number = 150
+let animationDelay: number = 500
 
 function init() {
   thickness = parseInt(document.getElementById('thickness').value)
@@ -123,7 +123,7 @@ window.runAlgorithm = (event: Event) => {
 
   console.log(`Executing algorihm`)
   const path: BoardPath = algorithm.findPath(board, animationDelay)
-  for (let i = 1; i < path.length - 1; i++)
+  for (let i = 0; i < path.length - 1; i++)
   {
     AnimationManager.setCellStyle(path[i], CellType.PATH, animationDelay)
   }
