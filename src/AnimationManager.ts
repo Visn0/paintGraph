@@ -35,7 +35,6 @@ class AnimationManager {
   static setCellStyle(coord: ICoordinate, type: CellType, animationDelay: number = 0) {
     let elem = this.getElementByCoord(coord)
 
-    // this.#sleep(animationDelay)
     this.#animationCounter += 1
     setTimeout(() => {
       this.#animationCounter -= 1

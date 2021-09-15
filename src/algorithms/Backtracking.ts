@@ -50,7 +50,7 @@ export class Backtracking implements IAlgorithm {
         pathLength: coord.pathLength + 1,
         prev: coord
       }
-      this.#solve(board, newCoord) //, currentPath.concat([coord]))
+      this.#solve(board, newCoord)
     }
   }
 
