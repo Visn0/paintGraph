@@ -58,3 +58,14 @@ export function validCoord(coord: ICoordinate, maxRow: number, maxCol: number): 
 export function compareCoords (a: ICoordinate, b: ICoordinate): boolean {
   return a.bound < b.bound
 }
+
+export function getPath (coord: ICoordinate): BoardPath {
+  let path: BoardPath = new Array<ICoordinate>(coord.pathLength)
+  path[coord.pathLength-1] = { ...coord }
+
+  for (let i = coord.pathLength - 2; i >= 0; i--) {
+    path[i] = path[i+1].prev
+  }
+
+  return path
+}
