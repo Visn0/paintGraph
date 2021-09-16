@@ -1,129 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>paintGraph</title>
-    <link rel="stylesheet" href="assets/board.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
-      crossorigin="anonymous"></script>
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>paintGraph</title>
+  <link rel="stylesheet" href="assets/board.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+    crossorigin="anonymous"></script>
+</head>
 
-  <body>
-    <!-- Modal -->
-    <div id="modal" class="modal" tabindex="-1" role="dialog">
-      <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
-        <div class="modal-content bg-dark text-light">
-          <div class="modal-header">
-            <h5 id="modal-title" class="modal-title">Modal title</h5>
-            <button id="close-modal" type="button" class="btn-close btn-close-white" data-dismiss="modal"
-              aria-label="Close">
-              <!-- <span aria-hidden="true">&times;</span> -->
-            </button>
-          </div>
-          <div id="modal-body" class="modal-body">
-          </div>
+<body>
+  <!-- Modal -->
+  <div id="modal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+      <div class="modal-content bg-dark text-light">
+        <div class="modal-header">
+          <h5 id="modal-title" class="modal-title">Modal title</h5>
+          <button id="close-modal" type="button" class="btn-close btn-close-white" data-dismiss="modal"
+            aria-label="Close">
+          </button>
+        </div>
+        <div id="modal-body" class="modal-body">
         </div>
       </div>
     </div>
+  </div>
 
-    <div id="modal" class="modal">
-      <div class="modal-content">
-        <span id="close-modal" class="close">&times;</span>
-        <p id="modal-title" class="modal-title"></p>
-        <p id="modal-body" class="modal-body"></p>
-      </div>
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <span id="close-modal" class="close">&times;</span>
+      <p id="modal-title" class="modal-title"></p>
+      <p id="modal-body" class="modal-body"></p>
     </div>
+  </div>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <div class="container">
-        <ul class="navbar-nav">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+      <ul class="navbar-nav">
 
-          <!-- Run button -->
-          <li class="nav-item">
-            <button id="run-btn"
-              class="btn btn-primary btn-lg text-white nav-link my-1 mx-0 p-3 px-5 w-100">Run</button>
-          </li>
+        <!-- Run button -->
+        <li class="nav-item">
+          <button id="run-btn" class="btn btn-primary btn-lg text-white nav-link my-1 mx-0 p-3 px-5 w-100">Run</button>
+        </li>
 
-          <!-- Algorithms -->
-          <li class="nav-item dropdown">
-            <button class="btn btn-secondary btn-lg text-white nav-link dropdown-toggle m-1 ml-2 p-3"
-              id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <!-- Algorithms -->
+        <li class="nav-item dropdown">
+          <button class="btn btn-secondary btn-lg text-white nav-link dropdown-toggle m-1 ml-2 p-3" id="navbarDropdown"
+            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            A Star (A*)
+          </button>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <button id="backtracking-btn" class="btn btn-lg dropdown-item">
+              Backtracking
+            </button>
+            <button id="branch-and-bound-btn" class="btn btn-lg dropdown-item">
+              Branch and bound
+            </button>
+            <button id="a-star-btn" class="btn btn-lg dropdown-item">
               A Star (A*)
             </button>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <button id="backtracking-btn" class="btn btn-lg dropdown-item">
-                Backtracking
-              </button>
-              <button id="branch-and-bound-btn" class="btn btn-lg dropdown-item">
-                Branch and bound
-              </button>
-              <button id="a-star-btn" class="btn btn-lg dropdown-item">
-                A Star (A*)
-              </button>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Cell types for drawing -->
+      <ul class="navbar-nav m-auto">
+        <li class="nav-item">
+          <button id="begin-btn" class="btn btn-primary btn-lg text-white nav-link m-1 p-3" ">Begin cell</button>
+        </li>
+        <li class=" nav-item">
+          <button id="wall-btn" class="btn btn-dark btn-lg text-white nav-link m-1 p-3" ">Wall cell</button>
+        </li>
+        <li class=" nav-item">
+          <button id="exit-btn" class="btn btn-success btn-lg text-white nav-link m-1 p-3" ">Exit cell</button>
+        </li>
+        <li class=" nav-item">
+          <button id="empty-btn" class="btn btn-outline-dark btn-lg text-dark nav-link m-1 p-3" ">Empty cell</button>
+        </li>
+      </ul>
+
+
+      <ul class="navbar-nav">
+        <!-- Options dropdown -->
+        <li class=" nav-item dropdown">
+          <button class="btn btn-secondary btn-lg text-white nav-link dropdown-toggle m-1 ml-2 p-3"
+            id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Options
+          </button>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <!-- Drawing thickness -->
+            <div class=" dropdown-item">
+              <label id="thickness_label" class="form-label">Thickness:</label>
+              <label id="thickness_label_value" class="form-label">1</label>
+              <br>
+              <input id="thickness" type="range" class="form-range" name="thickness" min=1 max=5 value=1>
             </div>
-          </li>
-        </ul>
 
-        <!-- Cell types for drawing -->
-        <ul class="navbar-nav m-auto">
-          <li class="nav-item">
-            <button id="begin-btn" class="btn btn-primary btn-lg text-white nav-link m-1 p-3" ">Begin cell</button>
-          </li>
-          <li class=" nav-item">
-              <button id="wall-btn" class="btn btn-dark btn-lg text-white nav-link m-1 p-3" ">Wall cell</button>
-          </li>
-          <li class=" nav-item">
-                <button id="exit-btn" class="btn btn-success btn-lg text-white nav-link m-1 p-3" ">Exit cell</button>
-          </li>
-          <li class=" nav-item">
-                  <button id="empty-btn" class="btn btn-outline-dark btn-lg text-dark nav-link m-1 p-3" ">Empty cell</button>
-          </li>
-          <li class=" nav-item" style="padding-left: 5px; text-align: center;">
-                    <label id="thickness_label" class="form-label">Thickness:</label>
-                    <label id="thickness_label_value" class="form-label">1</label>
-                    <br>
-                    <input id="thickness" type="range" class="form-range" name="thickness" min=1 max=5 value=1
-                      style="width: 80%;">
-          </li>
-          <li class=" nav-item" style="padding-left: 5px; text-align: center;">
-            <label id="boardrows_label" class="form-label">Rows:</label>
-            <input id="boardrows" type="number" class="form-control" name="boardrows" min=3 max=50 value=3
-              style="width: 80%;">
-          </li>
-        </ul>
+            <!-- Board rows -->
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item d-flex">
+              <label id="boardrows_label" class="form-label my-auto mr-2 pr-2">Rows:</label>
+              <input id="boardrows" type="number" class="form-control w-50 mx-auto" name="boardrows" min=3
+                max=50 value=3>
+            </div>
 
-        <!-- Clear map button -->
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <button id="clear-map-btn" class="btn btn-danger btn-lg text-white nav-link m-1 p-3">Clear map</button>
-          </li>
-        </ul>
-      </div>
-    </nav>
+            <!-- Clear map button -->
+            <div class="dropdown-divider"></div>
+            <div class="dropdown-item">
+              <button id="clear-map-btn" class="btn btn-danger btn-lg text-white nav-link m-1 p-3">Clear map</button>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
-    <!-- Board -->
-    <table id="board"></table>
+  <!-- Board -->
+  <table id="board"></table>
 
-    <!-- Path finding -->
-    <script src="src/constants.ts"></script>
-    <script src="index.ts"></script>
+  <!-- Path finding -->
+  <script src="src/constants.ts"></script>
+  <script src="index.ts"></script>
 
-    <!-- Bootstrap -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
-      crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
-      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
-      crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
-      crossorigin="anonymous"></script>
-  </body>
+  <!-- Bootstrap -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+</body>
 
 </html>
