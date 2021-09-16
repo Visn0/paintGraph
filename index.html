@@ -60,16 +60,19 @@
           <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="algorithms-dropdown">
             <a href="#"id="backtracking-btn" class="dropdown-item">
               Backtracking
+              <p class="warning-info">*Max size: 6 rows</p>
             </a>
 
             <div class="dropdown-divider"></div>
             <a href="#"id="branch-and-bound-btn" class="dropdown-item">
               Branch and bound
+              <p class="warning-info">*Max size: 20 rows</p>
             </a>
 
             <div class="dropdown-divider"></div>
             <a href="#"id="a-star-btn" class="dropdown-item">
               A Star (A*)
+              <p class="warning-info">*Max size: 100 rows</p>
             </a>
           </div>
         </li>
@@ -139,7 +142,10 @@
             <!-- Board rows -->
             <div class="dropdown-divider"></div>
             <div class="dropdown-item d-flex">
-              <label id="boardrows_label" class="form-label my-auto mr-auto p-2">Rows:</label>
+              <div class="form-label my-auto mr-auto p-2">
+                <label id="boardrows_label" class="">Rows:</label>
+                <span class="warning-info">*Max: <span id="max-rows-label">100</span></span>
+              </div>
               <input id="boardrows" type="number" class="form-control w-auto p-2" name="boardrows" min=3
                 max=50 value=3>
             </div>

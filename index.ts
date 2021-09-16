@@ -38,19 +38,23 @@ document.getElementById('boardrows').onchange = (event: Event) => {
 
 function updateBoardRows (rows: number) {
   let boardRowsElement: HTMLElement = document.getElementById('boardrows')
+  let maxRowsElement = document.getElementById('max-rows-label')
 
   if (algorithm instanceof Backtracking) {
-    boardRowsElement.max = `${MAX_ROWS.BACKTRACKING}`
+    boardRowsElement.max = MAX_ROWS.BACKTRACKING
+    maxRowsElement.innerText = MAX_ROWS.BACKTRACKING
     if (rows > MAX_ROWS.BACKTRACKING) {
       boardRows = MAX_ROWS.BACKTRACKING
     }
   } else if (algorithm instanceof BranchAndBound) {
     boardRowsElement.max = MAX_ROWS.BRANCH_AND_BOUND
+    maxRowsElement.innerText = MAX_ROWS.BRANCH_AND_BOUND
     if (rows > MAX_ROWS.BRANCH_AND_BOUND) {
       boardRows = MAX_ROWS.BRANCH_AND_BOUND
     }
   } else if (algorithm instanceof AStar) {
     boardRowsElement.max = MAX_ROWS.A_STAR
+    maxRowsElement.innerText = MAX_ROWS.A_STAR
     if (rows > MAX_ROWS.A_STAR) {
       boardRows = MAX_ROWS.A_STAR
     }
