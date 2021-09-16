@@ -17,12 +17,10 @@ body {
   left: 0;
   bottom: 1%;
   background-color: #fff;
-  border-radius: 10px;
 }
 
-td,
-tr {
-  border: 1px solid rgb(0, 105, 255) !important;
+td {
+  border: 1px solid #93efff !important;
 }
 
 .navbar-dark .nav-link {

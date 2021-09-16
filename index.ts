@@ -16,7 +16,7 @@ let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
 let animationDelay: number = 3
-let boardRows: number = MAX_ROWS.BACKTRACKING
+let boardRows: number = MAX_ROWS.A_STAR
 
 // ################################################
 // ### WINDOW INIT
