@@ -52,7 +52,7 @@ class AnimationManager {
           break
 
         case CellType.EXIT:
-          elem.className = 'bg-success'
+          elem.className = 'bg-danger'
           elem.style.backgroundColor = ''
           break
 
@@ -62,7 +62,7 @@ class AnimationManager {
           break
 
         case CellType.PATH:
-          elem.className = 'bg-danger'
+          elem.className = 'bg-success'
           elem.style.backgroundColor = ''
           break
       }
