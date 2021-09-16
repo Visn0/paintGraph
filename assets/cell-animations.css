@@ -1,0 +1,112 @@
+/* ##########################
+#### BEGIN NODE
+   ########################## */
+@keyframes beginNode {
+  0% {
+    background-color: rgb(0, 100, 255);
+    border-radius: 50%;
+    transform: scale(0.1);
+  }
+}
+
+.begin-node {
+  animation-name: beginNode;
+  animation-duration: 600ms;
+  animation-iteration-count: 1;
+  background-color: rgb(0, 100, 255);
+}
+
+/* ##########################
+#### WALL NODE
+   ########################## */
+@keyframes wallNode {
+  0% {
+    background-color: rgb(15, 15, 50);
+    border-radius: 50%;
+    transform: scale(0.1);
+  }
+}
+
+.wall-node {
+  animation-name: wallNode;
+  animation-duration: 600ms;
+  animation-iteration-count: 1;
+  background-color: rgb(15, 15, 50);
+}
+
+/* ##########################
+#### EXIT NODE
+   ########################## */
+@keyframes exitNode {
+  0% {
+    background-color: rgb(250, 50, 250);
+    border-radius: 50%;
+    transform: scale(0.1);
+  }
+}
+
+.exit-node {
+  animation-name: exitNode;
+  animation-duration: 600ms;
+  animation-iteration-count: 1;
+  background-color: rgb(250, 50, 250);
+}
+
+/* ##########################
+#### EMPTY NODE
+   ########################## */
+@keyframes emptyNode {
+  0% {
+    border-radius: 50%;
+    transform: scale(0.9);
+  }
+}
+
+.empty-node {
+  animation-name: emptyNode;
+  animation-duration: 600ms;
+  animation-iteration-count: 1;
+  background-color: #fff;
+}
+
+/* ##########################
+#### EXPLORED NODE
+   ########################## */
+@keyframes exploredNode {
+  0% {
+    background-color: #800000;
+    border-radius: 50%;
+    transform: scale(0.1);
+  }
+
+  50% {
+    background-color: rgb(0, 155, 155);
+    border-radius: 10%;
+    transform: scale(1.05);
+  }
+}
+
+.explored-node {
+  animation-name: exploredNode;
+  animation-duration: 2500ms;
+  animation-iteration-count: 1;
+  background-color: rgb(0, 255, 255);
+}
+
+/* ##########################
+#### PATH NODE
+   ########################## */
+@keyframes pathNode {
+  0% {
+    background-color: rgb(0, 255, 255);
+    border-radius: 50%;
+    transform: scale(0.1);
+  }
+}
+
+.path-node {
+  animation-name: pathNode;
+  animation-duration: 1000ms;
+  animation-iteration-count: 1;
+  background-color: rgb(250, 250, 0);
+}
