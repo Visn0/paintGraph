@@ -129,7 +129,7 @@ document.getElementById('thickness').onchange = (event: Event) => {
 // ### ALGORITHM SELECTION BUTTONS
 // ################################################
 function setAlgorithmBtn (innerText: string) {
-  let elem = document.getElementById('navbarDropdown')
+  let elem = document.getElementById('algorithms-dropdown')
   elem.innerText = innerText
   updateBoardRows(boardRows)
 }
