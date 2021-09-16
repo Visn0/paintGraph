@@ -106,7 +106,7 @@
 
 .path-node {
   animation-name: pathNode;
-  animation-duration: 1000ms;
+  animation-duration: 2500ms;
   animation-iteration-count: 1;
   background-color: rgb(250, 250, 0);
 }

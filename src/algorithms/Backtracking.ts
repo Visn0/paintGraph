@@ -28,8 +28,10 @@ export class Backtracking implements IAlgorithm {
     if (currentCell === CellType.WALL) return
 
     // Render the explorated paths
-    if (currentCell !== CellType.BEGIN && currentCell !== CellType.EXIT)
+    if (currentCell !== CellType.BEGIN && currentCell !== CellType.EXIT) {
       AnimationManager.setExploredCell(coord, this.#animationDelay)
+      board.setTableCellType(coord.row, coord.col, CellType.EXPLORED)
+    }
 
     if(coord.pathLength >= this.#memoization[coord.row][coord.col]) return
 

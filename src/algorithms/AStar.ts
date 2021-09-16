@@ -37,8 +37,10 @@ export class AStar implements IAlgorithm {
 
       let currentCell: CellType = board.getCellType(coord)
       // Render expanded nodes
-      if (currentCell !== CellType.BEGIN && currentCell !== CellType.EXIT)
+      if (currentCell !== CellType.BEGIN && currentCell !== CellType.EXIT) {
         AnimationManager.setExploredCell(coord, this.#animationDelay)
+        board.setTableCellType(coord.row, coord.col, CellType.EXPLORED)
+      }
 
       // Check if coord is still promising
       if (!this.#isCellPromising(coord)) continue
