@@ -29,6 +29,15 @@ window.onload = () => {
 }
 
 // ################################################
+// ### ANIMATION DELAY CONFIGURATION EVENTS AND FUNCTIONS
+// ################################################
+document.getElementById('animation-delay').onchange = (event: Event) => {
+  animationDelay = parseInt(event.target.value)
+  let elemValueDelay = document.getElementById('animation-delay_label_value')
+  elemValueDelay.innerHTML = animationDelay
+}
+
+// ################################################
 // ### BOARD SIZE EVENTS AND FUNCTIONS
 // ################################################
 document.getElementById('boardrows').onchange = (event: Event) => {
@@ -125,7 +134,6 @@ document.getElementById('thickness').onchange = (event: Event) => {
 
   let elemValueThickness = document.getElementById('thickness_label_value')
   elemValueThickness.innerHTML = thickness
-  console.log(event.target.value)
 }
 
 
