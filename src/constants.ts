@@ -14,6 +14,12 @@ export enum AlgorithmType {
   A_STAR = 'A Star (A*)'
 }
 
+export const MAX_ROWS = {
+  BACKTRACKING: 6,
+  BRANCH_AND_BOUND: 10,
+  A_STAR: 100
+}
+
 export const MOVES = [
   // { row: 1,  col: -1 }, // down left
   { row: 1, col: 0 }, // down

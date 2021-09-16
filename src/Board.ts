@@ -14,11 +14,6 @@ class Board {
     this.#element = document.getElementById('board')
     this.#rows = height
     this.#columns = width
-    this.#table = new Array<Array<CellType>>()
-    for (let r = 0; r < height; ++r)
-    {
-      this.#table.push(new Array<CellType>(width).fill(CellType.EMPTY))
-    }
   }
 
   get height(): number {
@@ -52,6 +47,15 @@ class Board {
   init() {
     let result = this.#tableToHTML()
     this.#element.innerHTML = result
+
+    this.#table = new Array<Array<CellType>>()
+    for (let r = 0; r < this.#rows; ++r)
+    {
+      this.#table.push(new Array<CellType>(this.#columns).fill(CellType.EMPTY))
+    }
+
+    this.#begin = null
+    this.#exit = null
   }
 
   clear() {
@@ -125,6 +129,12 @@ class Board {
     }
     AnimationManager.setCellStyle({ row: row, col: column }, type)
     this.#table[row][column] = type
+  }
+
+  resize (rows, columns) {
+    this.#rows = rows
+    this.#columns = columns
+    this.init()
   }
 
   #tableToHTML() {

@@ -1,8 +1,11 @@
+import AStar from './src/algorithms/AStar';
+import { Backtracking } from './src/algorithms/Backtracking';
+import { BranchAndBound } from './src/algorithms/BranchAndBound';
 import { FactoryAlgorithm } from './src/algorithms/FactoryAlgorithm';
 import { BoardPath, IAlgorithm } from './src/algorithms/IAlgorithm';
 import AnimationManager from './src/AnimationManager';
 import Board from './src/Board';
-import { AlgorithmType, CellType } from './src/constants';
+import { AlgorithmType, CellType, MAX_ROWS } from './src/constants';
 
 // ################################################
 // ### VARIABLES
@@ -13,16 +16,48 @@ let cellType: CellType = CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
 let animationDelay: number = 3
+let boardRows: number = MAX_ROWS.A_STAR
 
 // ################################################
 // ### WINDOW INIT
 // ################################################
 window.onload = () => {
-  thickness = parseInt(document.getElementById('thickness').value)
-  let rows: number = 50;
-  let cols: number = rows * 2;
-  board = new Board(rows, cols)
+  document.getElementById('thickness').value = thickness
+  document.getElementById('boardrows').value = boardRows
+  board = new Board(boardRows, boardRows * 2)
   board.init()
+}
+
+// ################################################
+// ### BOARD SIZE EVENTS AND FUNCTIONS
+// ################################################
+document.getElementById('boardrows').onchange = (event: Event) => {
+  boardRows = parseInt(event.target.value)
+  updateBoardRows(boardRows)
+}
+
+function updateBoardRows (rows: number) {
+  let boardRowsElement: HTMLElement = document.getElementById('boardrows')
+
+  if (algorithm instanceof Backtracking) {
+    boardRowsElement.max = `${MAX_ROWS.BACKTRACKING}`
+    if (rows > MAX_ROWS.BACKTRACKING) {
+      boardRows = MAX_ROWS.BACKTRACKING
+    }
+  } else if (algorithm instanceof BranchAndBound) {
+    boardRowsElement.max = MAX_ROWS.BRANCH_AND_BOUND
+    if (rows > MAX_ROWS.BRANCH_AND_BOUND) {
+      boardRows = MAX_ROWS.BRANCH_AND_BOUND
+    }
+  } else if (algorithm instanceof AStar) {
+    boardRowsElement.max = MAX_ROWS.A_STAR
+    if (rows > MAX_ROWS.A_STAR) {
+      boardRows = MAX_ROWS.A_STAR
+    }
+  }
+
+  boardRowsElement.value = boardRows
+  board.resize(boardRows, boardRows * 2)
 }
 
 // ################################################
@@ -96,6 +131,7 @@ document.getElementById('thickness').onchange = (event: Event) => {
 function setAlgorithmBtn (innerText: string) {
   let elem = document.getElementById('navbarDropdown')
   elem.innerText = innerText
+  updateBoardRows(boardRows)
 }
 
 // Backtracking button
