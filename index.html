@@ -26,7 +26,7 @@
       <div class="modal-content bg-dark text-light">
         <div class="modal-header">
           <h5 id="modal-title" class="modal-title">Modal title</h5>
-          <a href="#"id="close-modal" type="a" class="btn-close btn-close-white" data-dismiss="modal"
+          <a href="#" id="close-modal" type="a" class="btn-close btn-close-white" data-dismiss="modal"
             aria-label="Close">
           </a>
         </div>
@@ -44,8 +44,10 @@
     </div>
   </div>
 
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" style="background-color: rgb(0, 25, 55)!important;">
-    <a href="#"class="navbar-toggler" type="a" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"
+    style="background-color: rgb(0, 25, 55)!important;">
+    <a href="#" class="navbar-toggler" type="a" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </a>
     <div class="collapse navbar-collapse text-center" id="navbarSupportedContent">
@@ -58,10 +60,9 @@
 
         <!-- Algorithms -->
         <li class="nav-item dropdown px-3">
-          <a href="#"class="text-dark nav-link dropdown-toggle border-bottom border-white" id="algorithms-dropdown"
-            role="a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            data-toggle="tooltip" title="Select a path finding algorithm."
-            >
+          <a href="#" class="text-dark nav-link dropdown-toggle border-bottom border-white" id="algorithms-dropdown"
+            role="a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip"
+            title="Select a path finding algorithm.">
             A Star (A*)
           </a>
           <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="algorithms-dropdown">
@@ -86,40 +87,43 @@
 
         <!-- Cell types for drawing -->
         <li class="nav-item dropdown px-3">
-          <a href="#"class=" text-dark nav-link dropdown-toggle border-bottom border-white"
-            id="cell-types-dropdown" role="a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-            data-toggle="tooltip" title="Select a square type to draw."
-            >
+          <a href="#" class=" text-dark nav-link dropdown-toggle border-bottom border-white" id="cell-types-dropdown"
+            role="a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-toggle="tooltip"
+            title="Select a square type to draw.">
             Square types
           </a>
           <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="cell-types-dropdown">
             <a href="#" id="begin-btn" class="dropdown-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-square-fill border border-white rounded begin-node" viewBox="0 0 16 16">
-                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-square-fill border border-white rounded begin-node" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
               </svg>
               Begin cell
             </a>
 
             <div class="dropdown-divider"></div>
             <a href="#" id="wall-btn" class="dropdown-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-square-fill border border-white rounded wall-node" viewBox="0 0 16 16">
-                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-square-fill border border-white rounded wall-node" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
               </svg>
               Wall cell
             </a>
 
             <div class="dropdown-divider"></div>
             <a href="#" id="exit-btn" class="dropdown-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-square-fill border border-white rounded exit-node" viewBox="0 0 16 16">
-                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-square-fill border border-white rounded exit-node" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
               </svg>
               Exit cell
             </a>
 
             <div class="dropdown-divider"></div>
             <a href="#" id="empty-btn" class="dropdown-item">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-square-fill border border-white rounded empty-node" viewBox="0 0 16 16">
-                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z"/>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-square-fill border border-white rounded empty-node" viewBox="0 0 16 16">
+                <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2z" />
               </svg>
               Empty cell
             </a>
@@ -128,13 +132,14 @@
 
         <!-- Options dropdown -->
         <li class=" nav-item dropdown px-3">
-          <a href="#"class=" text-dark nav-link dropdown-toggle border-bottom border-white"
-            id="options-dropdown" role="a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a href="#" class=" text-dark nav-link dropdown-toggle border-bottom border-white" id="options-dropdown"
+            role="a" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             Options
           </a>
           <div class="dropdown-menu dropdown-menu-dark" aria-labelledby="options-dropdown">
             <!-- Drawing thickness -->
-            <div class=" dropdown-item d-flex flex-wrap" data-toggle="tooltip" title="Amount of square to draw at the same time.">
+            <div class=" dropdown-item d-flex flex-wrap" data-toggle="tooltip"
+              title="Amount of square to draw at the same time.">
               <label id="thickness_label" class="form-label mr-auto p-2 my-auto">Thickness:</label>
               <label id="thickness_label_value" class="form-label p-2 my-auto">1</label>
               <br>
@@ -143,28 +148,31 @@
 
             <!-- Board rows -->
             <div class="dropdown-divider"></div>
-            <div class="dropdown-item d-flex" data-toggle="tooltip" title="Number of rows that the board will have.&#10;Columns = Rows * 2">
+            <div class="dropdown-item d-flex" data-toggle="tooltip"
+              title="Number of rows that the board will have.&#10;Columns = Rows * 2">
               <div class="form-label my-auto mr-auto p-2">
                 <label id="boardrows_label" class="">Rows:</label>
                 <span class="warning-info">*Max: <span id="max-rows-label">100</span></span>
               </div>
-              <input id="boardrows" type="number" class="form-control w-auto p-2" name="boardrows" min=3
-                max=100 value=3>
+              <input id="boardrows" type="number" class="form-control w-auto p-2" name="boardrows" min=3 max=100
+                value=50>
             </div>
 
             <!-- Animation delay -->
             <div class="dropdown-divider"></div>
-            <div class=" dropdown-item d-flex flex-wrap" data-toggle="tooltip" title="Time spent between every explored square.">
+            <div class=" dropdown-item d-flex flex-wrap" data-toggle="tooltip"
+              title="Time spent between every explored square.">
               <label id="animation-delay_label" class="form-label mr-auto p-2 my-auto">Delay (ms):</label>
               <label id="animation-delay_label_value" class="form-label p-2 my-auto">1</label>
               <br>
-              <input id="animation-delay" type="range" class="form-range p-2 my-auto" name="animation-delay" min=0 max=10 value=1>
+              <input id="animation-delay" type="range" class="form-range p-2 my-auto" name="animation-delay" min=0
+                max=10 value=0>
             </div>
 
             <!-- Clear map -->
             <div class="dropdown-divider"></div>
             <div class="dropdown-item">
-              <a href="#"id="clear-map-btn" class="btn btn-danger text-dark nav-link m-1 p-3">Clear map</a>
+              <a href="#" id="clear-map-btn" class="btn btn-danger text-dark nav-link m-1 p-3">Clear map</a>
             </div>
           </div>
         </li>

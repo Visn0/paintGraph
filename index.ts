@@ -12,11 +12,11 @@ import { AlgorithmType, CellType, MAX_ROWS } from './src/constants';
 // ################################################
 const modal: HTMLElement = document.getElementById('modal')
 let board: Board = null
-let cellType: CellType = CellType.EMPTY
+let cellType: CellType = CellType.WALL // CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
-let animationDelay: number = 3
-let boardRows: number = MAX_ROWS.A_STAR
+let animationDelay: number = 0
+let boardRows: number = 50 // MAX_ROWS.A_STAR
 
 // ################################################
 // ### WINDOW INIT
@@ -24,6 +24,8 @@ let boardRows: number = MAX_ROWS.A_STAR
 window.onload = () => {
   document.getElementById('thickness').value = thickness
   document.getElementById('boardrows').value = boardRows
+  document.getElementById('animation-delay').value = animationDelay
+  document.getElementById('animation-delay_label_value').innerHTML = animationDelay
   board = new Board(boardRows, boardRows * 2)
   board.init()
 }
@@ -45,26 +47,32 @@ document.getElementById('boardrows').onchange = (event: Event) => {
   updateBoardRows(boardRows)
 }
 
-function updateBoardRows (rows: number) {
+function updateBoardRows(rows: number) {
   let boardRowsElement: HTMLElement = document.getElementById('boardrows')
   let maxRowsElement = document.getElementById('max-rows-label')
 
-  if (algorithm instanceof Backtracking) {
+  if (algorithm instanceof Backtracking)
+  {
     boardRowsElement.max = MAX_ROWS.BACKTRACKING
     maxRowsElement.innerText = MAX_ROWS.BACKTRACKING
-    if (rows > MAX_ROWS.BACKTRACKING) {
+    if (rows > MAX_ROWS.BACKTRACKING)
+    {
       boardRows = MAX_ROWS.BACKTRACKING
     }
-  } else if (algorithm instanceof BranchAndBound) {
+  } else if (algorithm instanceof BranchAndBound)
+  {
     boardRowsElement.max = MAX_ROWS.BRANCH_AND_BOUND
     maxRowsElement.innerText = MAX_ROWS.BRANCH_AND_BOUND
-    if (rows > MAX_ROWS.BRANCH_AND_BOUND) {
+    if (rows > MAX_ROWS.BRANCH_AND_BOUND)
+    {
       boardRows = MAX_ROWS.BRANCH_AND_BOUND
     }
-  } else if (algorithm instanceof AStar) {
+  } else if (algorithm instanceof AStar)
+  {
     boardRowsElement.max = MAX_ROWS.A_STAR
     maxRowsElement.innerText = MAX_ROWS.A_STAR
-    if (rows > MAX_ROWS.A_STAR) {
+    if (rows > MAX_ROWS.A_STAR)
+    {
       boardRows = MAX_ROWS.A_STAR
     }
   }
@@ -78,8 +86,10 @@ function updateBoardRows (rows: number) {
 // ################################################
 function dfs(row: number, column: number, K: number) {
   K = parseInt(K - 1)
-  for (let i = Math.max(0, row - K); i <= Math.min(board.height - 1, row + K); i++) {
-    for (let j = Math.max(0, column - K); j <= Math.min(board.width - 1, column + K); j++) {
+  for (let i = Math.max(0, row - K); i <= Math.min(board.height - 1, row + K); i++)
+  {
+    for (let j = Math.max(0, column - K); j <= Math.min(board.width - 1, column + K); j++)
+    {
       board.setCellType(i, j, cellType)
     }
   }
@@ -95,9 +105,11 @@ window.onCellClick = (event: Event, row: number, column: number) => {
 
   if (board.getCellType({ row: row, col: column }) === cellType) return
 
-  if (validForThickness(cellType)) {
+  if (validForThickness(cellType))
+  {
     dfs(row, column, thickness)
-  } else {
+  } else
+  {
     board.setCellType(row, column, cellType)
   }
 }
@@ -114,9 +126,11 @@ window.onCellDrag = (event: Event, row: number, colum: number) => {
 window.onCellOver = (event: Event, row: number, column: number) => {
   event.preventDefault()
 
-  if (validForThickness(cellType)) {
+  if (validForThickness(cellType))
+  {
     dfs(row, column, thickness)
-  } else {
+  } else
+  {
     board.setCellType(row, column, cellType)
   }
 }
@@ -140,7 +154,7 @@ document.getElementById('thickness').onchange = (event: Event) => {
 // ################################################
 // ### ALGORITHM SELECTION BUTTONS
 // ################################################
-function setAlgorithmBtn (innerText: string) {
+function setAlgorithmBtn(innerText: string) {
   let elem = document.getElementById('algorithms-dropdown')
   elem.innerText = innerText
   updateBoardRows(boardRows)
@@ -166,12 +180,14 @@ document.getElementById('a-star-btn').onclick = (event: Event) => {
 
 // Run algorithm button
 document.getElementById('run-btn').onclick = (event: Event) => {
-  if (!board.isThereBegin) {
+  if (!board.isThereBegin)
+  {
     showModal('ERROR', "Missing beginning cell.")
     return
   }
 
-  if (!board.isThereExit) {
+  if (!board.isThereExit)
+  {
     showModal('ERROR', "Missing exit cell.")
     return
   }
@@ -180,11 +196,13 @@ document.getElementById('run-btn').onclick = (event: Event) => {
 
   console.log(`Executing algorihm`)
   const path: BoardPath = algorithm.findPath(board, animationDelay)
-  if (path.length === 0) {
+  if (path.length === 0)
+  {
     showModal('Uuups!', 'There are not paths.')
   }
 
-  for (let i = 0; i < path.length - 1; i++) {
+  for (let i = 0; i < path.length - 1; i++)
+  {
     AnimationManager.setCellStyle(path[i], CellType.PATH, animationDelay)
   }
   console.log(`Finished algorihm`)
@@ -196,7 +214,7 @@ document.getElementById('run-btn').onclick = (event: Event) => {
 document.getElementById('close-modal').onclick = hideModal
 document.getElementById('modal').onclick = hideModal
 
-function showModal (title: string, body: string) {
+function showModal(title: string, body: string) {
   console.log(title, body)
   let elemTitle = document.getElementById('modal-title')
   elemTitle.innerText = title
@@ -208,7 +226,7 @@ function showModal (title: string, body: string) {
   modal.classList.add('show')
 }
 
-function hideModal () {
+function hideModal() {
   modal.style.display = 'none'
   modal.classList.remove('show')
 }

@@ -7,7 +7,7 @@ class AnimationManager {
 
   private constructor() { }
 
-  static #getDelay (animationDelay: number) {
+  static #getDelay(animationDelay: number) {
     return animationDelay * this.#animationCounter
   }
 
@@ -48,7 +48,7 @@ class AnimationManager {
           break
 
         case CellType.WALL:
-          elem.className = 'wall-node'
+          elem.className = 'bg-dark' //'wall-node'
           elem.style.backgroundColor = ''
           break
 
@@ -58,7 +58,7 @@ class AnimationManager {
           break
 
         case CellType.EMPTY:
-          elem.className = 'empty-node'
+          elem.className = '' //'empty-node'
           elem.style.backgroundColor = ''
           break
 
