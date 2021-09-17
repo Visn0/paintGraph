@@ -33,9 +33,9 @@
 }
 
 .wall-node {
-  animation-name: wallNode;
+  /* animation-name: wallNode;
   animation-duration: 600ms;
-  animation-iteration-count: 1;
+  animation-iteration-count: 1; */
   background-color: rgb(15, 15, 50);
   color: rgb(15, 15, 50);
 }
