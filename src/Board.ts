@@ -78,7 +78,7 @@ class Board {
     {
       for (let c = 0; c < this.#columns; c++)
       {
-        AnimationManager.setCellStyle({ row: r, col: c }, CellType.WALL)
+        AnimationManager.setWallCell({ row: r, col: c })
         this.#table[r][c] = CellType.WALL
       }
     }
