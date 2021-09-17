@@ -30,3 +30,8 @@ export const MOVES = [
   // { row: -1, col: -1 }, // up left
   { row: 0, col: -1 }, // left
 ]
+
+// [min, max) range
+export function getRandomInt(min: number = 0, max: number): number {
+  return Math.floor(Math.random() * (max - min)) + min;
+}

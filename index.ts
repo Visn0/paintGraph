@@ -3,6 +3,7 @@ import { Backtracking } from './src/algorithms/Backtracking';
 import { BranchAndBound } from './src/algorithms/BranchAndBound';
 import { FactoryAlgorithm } from './src/algorithms/FactoryAlgorithm';
 import { BoardPath, IAlgorithm } from './src/algorithms/IAlgorithm';
+import { MazeRandom } from './src/algorithms/MazeRandom';
 import AnimationManager from './src/AnimationManager';
 import Board from './src/Board';
 import { AlgorithmType, CellType, MAX_ROWS } from './src/constants';
@@ -17,6 +18,7 @@ let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
 let animationDelay: number = 0
 let boardRows: number = 50 // MAX_ROWS.A_STAR
+let maxBoardRows: number = 100 // MAX_ROWS.A_STAR
 
 // ################################################
 // ### WINDOW INIT
@@ -24,8 +26,9 @@ let boardRows: number = 50 // MAX_ROWS.A_STAR
 window.onload = () => {
   document.getElementById('thickness').value = thickness
   document.getElementById('boardrows').value = boardRows
+  document.getElementById('max-rows-label').innerText = `${maxBoardRows}`
   document.getElementById('animation-delay').value = animationDelay
-  document.getElementById('animation-delay_label_value').innerHTML = `${animationDelay}`
+  document.getElementById('animation-delay_label_value').innerText = `${animationDelay}`
   board = new Board(boardRows, boardRows * 2)
   board.init()
 }
@@ -36,7 +39,7 @@ window.onload = () => {
 document.getElementById('animation-delay').onchange = (event: Event) => {
   animationDelay = parseInt(event.target.value)
   let elemValueDelay = document.getElementById('animation-delay_label_value')
-  elemValueDelay.innerHTML = animationDelay
+  elemValueDelay.innerText = `${animationDelay}`
 }
 
 // ################################################
@@ -54,7 +57,7 @@ function updateBoardRows(rows: number) {
   if (algorithm instanceof Backtracking)
   {
     boardRowsElement.max = MAX_ROWS.BACKTRACKING
-    maxRowsElement.innerText = MAX_ROWS.BACKTRACKING
+    maxRowsElement.innerText = `${MAX_ROWS.BACKTRACKING}`
     if (rows > MAX_ROWS.BACKTRACKING)
     {
       boardRows = MAX_ROWS.BACKTRACKING
@@ -62,7 +65,7 @@ function updateBoardRows(rows: number) {
   } else if (algorithm instanceof BranchAndBound)
   {
     boardRowsElement.max = MAX_ROWS.BRANCH_AND_BOUND
-    maxRowsElement.innerText = MAX_ROWS.BRANCH_AND_BOUND
+    maxRowsElement.innerText = `${MAX_ROWS.BRANCH_AND_BOUND}`
     if (rows > MAX_ROWS.BRANCH_AND_BOUND)
     {
       boardRows = MAX_ROWS.BRANCH_AND_BOUND
@@ -70,7 +73,7 @@ function updateBoardRows(rows: number) {
   } else if (algorithm instanceof AStar)
   {
     boardRowsElement.max = MAX_ROWS.A_STAR
-    maxRowsElement.innerText = MAX_ROWS.A_STAR
+    maxRowsElement.innerText = `${MAX_ROWS.A_STAR}`
     if (rows > MAX_ROWS.A_STAR)
     {
       boardRows = MAX_ROWS.A_STAR
@@ -147,7 +150,7 @@ document.getElementById('thickness').onchange = (event: Event) => {
   thickness = parseInt(event.target.value)
 
   let elemValueThickness = document.getElementById('thickness_label_value')
-  elemValueThickness.innerHTML = thickness
+  elemValueThickness.innerText = `${thickness}`
 }
 
 
@@ -206,6 +209,23 @@ document.getElementById('run-btn').onclick = (event: Event) => {
     AnimationManager.setCellStyle(path[i], CellType.PATH, animationDelay)
   }
   console.log(`Finished algorihm`)
+}
+
+// ################################################
+// ### MAZE GENERATOR
+// ################################################
+// Random Generator button
+document.getElementById('random-maze-10-btn').onclick = (event: Event) => {
+  let generator = new MazeRandom()
+  generator.generate(board, 1)
+}
+document.getElementById('random-maze-20-btn').onclick = (event: Event) => {
+  let generator = new MazeRandom()
+  generator.generate(board, 2)
+}
+document.getElementById('random-maze-30-btn').onclick = (event: Event) => {
+  let generator = new MazeRandom()
+  generator.generate(board, 3)
 }
 
 // ################################################

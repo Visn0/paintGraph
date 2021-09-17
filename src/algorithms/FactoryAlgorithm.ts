@@ -6,8 +6,8 @@ import { AlgorithmType } from "../constants";
 
 const algorithms: Map<AlgorithmType, IAlgorithm> = new Map<AlgorithmType, IAlgorithm>([
   [AlgorithmType.BACKTRACKING, new Backtracking()],
-  [AlgorithmType.BRANCH_AND_BOUND, new BranchAndBound()],
   [AlgorithmType.A_STAR, new AStar()],
+  // [AlgorithmType.BRANCH_AND_BOUND, new BranchAndBound()],
 ])
 
 export function FactoryAlgorithm(algorithmType: AlgorithmType): IAlgorithm {
