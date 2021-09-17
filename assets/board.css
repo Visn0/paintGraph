@@ -21,6 +21,10 @@ body {
 
 td {
   border: 1px solid #93efff !important;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
 }
 
 .navbar-dark .nav-link {
