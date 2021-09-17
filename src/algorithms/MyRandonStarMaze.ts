@@ -8,7 +8,7 @@ export class MyRandomStarMaze {
 
   constructor() { }
 
-  generate(board: Board) {
+  generate(board: Board, animationDelay: number) {
     let visited = new Array<Array<boolean>>()
     for (let r = 0; r < board.height; ++r)
     {
@@ -26,7 +26,7 @@ export class MyRandomStarMaze {
     while (stack.lenght != 0)
     {
       coord = stack.pop()
-      board.setTableCellType(coord.row, coord.col, CellType.EMPTY)
+      board.setTableCellType(coord.row, coord.col, CellType.EMPTY, animationDelay)
 
       for (let m of randommoves)
       {

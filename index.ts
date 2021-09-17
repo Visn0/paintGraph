@@ -20,8 +20,8 @@ let cellType: CellType = CellType.WALL // CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
 let animationDelay: number = 0
-let boardRows: number = 50 // MAX_ROWS.A_STAR
-let maxBoardRows: number = 100 // MAX_ROWS.A_STAR
+let boardRows: number = MAX_ROWS.DEFAULT
+let maxBoardRows: number = MAX_ROWS.TOTAL
 
 // ################################################
 // ### WINDOW INIT
@@ -232,7 +232,7 @@ document.getElementById('random-maze-30-btn').onclick = (event: Event) => {
 }
 document.getElementById('random-star-btn').onclick = (event: Event) => {
   let generator = new MyRandomStarMaze()
-  generator.generate(board)
+  generator.generate(board, animationDelay)
 }
 document.getElementById('random-maze-dfs-btn').onclick = (event: Event) => {
   let generator = new RandomizedDFS()

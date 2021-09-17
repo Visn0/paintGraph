@@ -25,8 +25,7 @@ export class RandomizedBFS {
     while (stack.lenght != 0)
     {
       coord = stack.pop()
-      AnimationManager.setCellStyle(coord, CellType.EMPTY, animationDelay)
-      board.setTableCellType(coord.row, coord.col, CellType.EMPTY)
+      board.setTableCellType(coord.row, coord.col, CellType.EMPTY, animationDelay)
 
       randommoves = randomizeElements([...randommoves])
       for (let m of randommoves)

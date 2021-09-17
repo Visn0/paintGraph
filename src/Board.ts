@@ -101,8 +101,8 @@ class Board {
     }
   }
 
-  setTableCellType(row: number, column: number, type: CellType) {
-    AnimationManager.setCellStyle({ row: row, col: column }, type)
+  setTableCellType(row: number, column: number, type: CellType, animationDelay: number = 0) {
+    AnimationManager.setCellStyle({ row: row, col: column }, type, animationDelay)
     this.#table[row][column] = type
   }
 
