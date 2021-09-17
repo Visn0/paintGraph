@@ -33,6 +33,9 @@ export const MOVES = [
   { row: 0, col: -1 }, // left
 ]
 
+// Milliseconds
+export const ANIMATION_DELAYS = [1, 10, 20, 30, 40, 50]
+
 // [min, max) range
 export function getRandomInt(min: number = 0, max: number): number {
   return Math.floor(Math.random() * (max - min)) + min;

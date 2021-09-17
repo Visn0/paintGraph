@@ -4,12 +4,12 @@ import { BranchAndBound } from './src/algorithms/BranchAndBound';
 import { FactoryAlgorithm } from './src/algorithms/FactoryAlgorithm';
 import { BoardPath, IAlgorithm } from './src/algorithms/IAlgorithm';
 import { MazeRandom } from './src/algorithms/MazeRandom';
-import { MazeRandomizedDFS, MyRandomStarMaze } from './src/algorithms/MyRandonStarMaze';
+import { MyRandomStarMaze } from './src/algorithms/MyRandonStarMaze';
 import { RandomizedBFS } from './src/algorithms/RandomizedBFS';
 import { RandomizedDFS } from './src/algorithms/RandomizedDFS';
 import AnimationManager from './src/AnimationManager';
 import Board from './src/Board';
-import { AlgorithmType, CellType, MAX_ROWS } from './src/constants';
+import { AlgorithmType, CellType, MAX_ROWS, ANIMATION_DELAYS } from './src/constants';
 
 // ################################################
 // ### VARIABLES
@@ -19,7 +19,7 @@ let board: Board = null
 let cellType: CellType = CellType.WALL // CellType.EMPTY
 let algorithm: IAlgorithm = FactoryAlgorithm(AlgorithmType.A_STAR)
 let thickness: number = 1
-let animationDelay: number = 0
+let animationDelay: number = ANIMATION_DELAYS[0]
 let boardRows: number = MAX_ROWS.DEFAULT
 let maxBoardRows: number = MAX_ROWS.TOTAL
 
@@ -31,6 +31,7 @@ window.onload = () => {
   document.getElementById('boardrows').value = boardRows
   document.getElementById('max-rows-label').innerText = `${maxBoardRows}`
   document.getElementById('animation-delay').value = animationDelay
+  document.getElementById('animation-delay').max = ANIMATION_DELAYS.length - 1
   document.getElementById('animation-delay_label_value').innerText = `${animationDelay}`
   board = new Board(boardRows, boardRows * 2)
   board.init()
@@ -40,7 +41,7 @@ window.onload = () => {
 // ### ANIMATION DELAY CONFIGURATION EVENTS AND FUNCTIONS
 // ################################################
 document.getElementById('animation-delay').onchange = (event: Event) => {
-  animationDelay = parseInt(event.target.value)
+  animationDelay = ANIMATION_DELAYS[parseInt(event.target.value)]
   let elemValueDelay = document.getElementById('animation-delay_label_value')
   elemValueDelay.innerText = `${animationDelay}`
 }
