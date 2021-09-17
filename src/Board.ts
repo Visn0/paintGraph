@@ -1,3 +1,4 @@
+import { type } from "os"
 import { ICoordinate } from "./algorithms/IAlgorithm"
 import AnimationManager from './AnimationManager'
 import { CellType } from "./constants"
@@ -40,7 +41,7 @@ class Board {
     return { ...this.#exit }
   }
 
-  getCellType (coord: ICoordinate): CellType {
+  getCellType(coord: ICoordinate): CellType {
     return this.#table[coord.row][coord.col]
   }
 
@@ -72,7 +73,21 @@ class Board {
     this.#exit = null
   }
 
-  clearExploredNodes () {
+  fillWalls() {
+    for (let r = 0; r < this.#rows; r++)
+    {
+      for (let c = 0; c < this.#columns; c++)
+      {
+        AnimationManager.setCellStyle({ row: r, col: c }, CellType.WALL)
+        this.#table[r][c] = CellType.WALL
+      }
+    }
+
+    this.#begin = null
+    this.#exit = null
+  }
+
+  clearExploredNodes() {
     for (let r = 0; r < this.#rows; r++)
     {
       for (let c = 0; c < this.#columns; c++)
@@ -131,7 +146,7 @@ class Board {
     this.#table[row][column] = type
   }
 
-  resize (rows, columns) {
+  resize(rows, columns) {
     this.#rows = rows
     this.#columns = columns
     this.init()

@@ -4,6 +4,7 @@ import { BranchAndBound } from './src/algorithms/BranchAndBound';
 import { FactoryAlgorithm } from './src/algorithms/FactoryAlgorithm';
 import { BoardPath, IAlgorithm } from './src/algorithms/IAlgorithm';
 import { MazeRandom } from './src/algorithms/MazeRandom';
+import { MazeRandomizedDFS } from './src/algorithms/MazeRandomizedDFS';
 import AnimationManager from './src/AnimationManager';
 import Board from './src/Board';
 import { AlgorithmType, CellType, MAX_ROWS } from './src/constants';
@@ -226,6 +227,11 @@ document.getElementById('random-maze-20-btn').onclick = (event: Event) => {
 document.getElementById('random-maze-30-btn').onclick = (event: Event) => {
   let generator = new MazeRandom()
   generator.generate(board, 3)
+}
+document.getElementById('random-maze-dfs-btn').onclick = (event: Event) => {
+  console.log("random dfs")
+  let generator = new MazeRandomizedDFS()
+  generator.generate(board)
 }
 
 // ################################################

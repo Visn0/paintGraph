@@ -35,3 +35,22 @@ export const MOVES = [
 export function getRandomInt(min: number = 0, max: number): number {
   return Math.floor(Math.random() * (max - min)) + min;
 }
+
+export function randomizeElements(elements) {
+  let array = [...elements]
+  let currentIndex = array.length, randomIndex;
+
+  while (currentIndex != 0)
+  {
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+}
+
