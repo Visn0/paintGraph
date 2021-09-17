@@ -1,10 +1,9 @@
-import { IAlgorithm, ICoordinate, BoardPath, validCoord, getPath, Stack, IBaseCoordinate } from './IAlgorithm'
+import { IAlgorithm, ICoordinate, BoardPath, validCoord, getPath, Stack, IBaseCoordinate, Queue } from './IAlgorithm'
 import Board from '../Board'
 import AnimationManager from '../AnimationManager';
 import { CellType, getRandomInt, MOVES, randomizeElements } from '../constants'
 
-export class MazeRandomizedDFS {
-  // #bestPath: BoardPath = []
+export class RandomizedBFS {
   #animationDelay: number
 
   constructor() { }
@@ -15,10 +14,9 @@ export class MazeRandomizedDFS {
     {
       visited.push(new Array<boolean>(board.width).fill(false))
     }
-    // board.clear()
     board.fillWalls()
 
-    let stack: Stack<IBaseCoordinate> = new Stack<IBaseCoordinate>()
+    let stack: Queue<IBaseCoordinate> = new Queue<IBaseCoordinate>()
     let coord = new IBaseCoordinate(getRandomInt(1, board.height - 1), getRandomInt(1, board.width))
     visited[coord.row][coord.col] = true;
     stack.push(coord)
@@ -26,11 +24,10 @@ export class MazeRandomizedDFS {
 
     while (stack.lenght != 0)
     {
-      console.log(stack.lenght)
       coord = stack.pop()
       board.setTableCellType(coord.row, coord.col, CellType.EMPTY)
 
-
+      randommoves = randomizeElements([...randommoves])
       for (let m of randommoves)
       {
         let newCoord: IBaseCoordinate = {
@@ -43,11 +40,15 @@ export class MazeRandomizedDFS {
           || this.hasVisitedNeighbors(visited, newCoord, coord)
         )
         {
-          randommoves = randomizeElements([...MOVES])
           continue;
         }
-        visited[newCoord.row][newCoord.col] = true;
-        stack.push(newCoord)
+        else
+        {
+          visited[newCoord.row][newCoord.col] = true;
+          stack.push(coord)
+          stack.push(newCoord)
+          break;
+        }
       }
     }
   }
@@ -67,43 +68,5 @@ export class MazeRandomizedDFS {
     }
     return false;
   }
-}
-
-  // #solve (board: Board, coord: ICoordinate) {
-  //   // Check if coord is inside the board
-  //   if (!validCoord(coord, board.height, board.width)) return
-
-  //   const currentCell = board.getCellType(coord)
-  //   if (currentCell === CellType.WALL) return
-
-  //   // Render the explorated paths
-  //   if (currentCell !== CellType.BEGIN && currentCell !== CellType.EXIT) {
-  //     AnimationManager.setExploredCell(coord, this.#animationDelay)
-  //     board.setTableCellType(coord.row, coord.col, CellType.EXPLORED)
-  //   }
-
-  //   if(coord.pathLength >= this.#memoization[coord.row][coord.col]) return
-
-  //   this.#memoization[coord.row][coord.col] = coord.pathLength
-
-  //   if (currentCell === CellType.EXIT)
-  //   {
-  //     this.#bestPath = getPath(coord)
-  //     return
-  //   }
-
-  //   // Explore surrounding cells
-  //   for (let m of MOVES)
-  //   {
-  //     let newCoord = {
-  //       row: coord.row + m.row,
-  //       col: coord.col + m.col,
-  //       pathLength: coord.pathLength + 1,
-  //       prev: coord
-  //     }
-  //     this.#solve(board, newCoord)
-  //   }
-  // }
-
 }
 

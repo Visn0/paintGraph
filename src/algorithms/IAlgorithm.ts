@@ -74,3 +74,18 @@ export class Stack<T> {
     return this._store.pop();
   }
 }
+
+export class Queue<T> {
+  _store: T[] = [];
+  lenght = 0
+  push(val: T) {
+    this.lenght += 1
+    this._store.push(val);
+  }
+  pop(): T | undefined {
+    if (this.lenght != 0)
+      this.lenght -= 1
+    return this._store.shift();
+  }
+}
+
