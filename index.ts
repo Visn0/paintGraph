@@ -25,7 +25,7 @@ window.onload = () => {
   document.getElementById('thickness').value = thickness
   document.getElementById('boardrows').value = boardRows
   document.getElementById('animation-delay').value = animationDelay
-  document.getElementById('animation-delay_label_value').innerHTML = animationDelay
+  document.getElementById('animation-delay_label_value').innerHTML = `${animationDelay}`
   board = new Board(boardRows, boardRows * 2)
   board.init()
 }
