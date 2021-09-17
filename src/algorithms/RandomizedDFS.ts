@@ -8,13 +8,12 @@ export class RandomizedDFS {
 
   constructor() { }
 
-  generate(board: Board) {
+  generate(board: Board, animationDelay: number = 0) {
     let visited = new Array<Array<boolean>>()
     for (let r = 0; r < board.height; ++r)
     {
       visited.push(new Array<boolean>(board.width).fill(false))
     }
-    // board.clear()
     board.fillWalls()
 
     let stack: Stack<IBaseCoordinate> = new Stack<IBaseCoordinate>()
@@ -26,6 +25,7 @@ export class RandomizedDFS {
     while (stack.lenght != 0)
     {
       coord = stack.pop()
+      AnimationManager.setCellStyle(coord, CellType.EMPTY, animationDelay)
       board.setTableCellType(coord.row, coord.col, CellType.EMPTY)
 
       randommoves = randomizeElements([...randommoves])
@@ -43,13 +43,11 @@ export class RandomizedDFS {
         {
           continue;
         }
-        else
-        {
-          visited[newCoord.row][newCoord.col] = true;
-          stack.push(coord)
-          stack.push(newCoord)
-          break;
-        }
+
+        visited[newCoord.row][newCoord.col] = true;
+        stack.push(coord)
+        stack.push(newCoord)
+        break;
       }
     }
   }

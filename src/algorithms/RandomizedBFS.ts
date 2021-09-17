@@ -8,7 +8,7 @@ export class RandomizedBFS {
 
   constructor() { }
 
-  generate(board: Board) {
+  generate(board: Board, animationDelay: number = 0) {
     let visited = new Array<Array<boolean>>()
     for (let r = 0; r < board.height; ++r)
     {
@@ -25,6 +25,7 @@ export class RandomizedBFS {
     while (stack.lenght != 0)
     {
       coord = stack.pop()
+      AnimationManager.setCellStyle(coord, CellType.EMPTY, animationDelay)
       board.setTableCellType(coord.row, coord.col, CellType.EMPTY)
 
       randommoves = randomizeElements([...randommoves])
@@ -42,13 +43,11 @@ export class RandomizedBFS {
         {
           continue;
         }
-        else
-        {
-          visited[newCoord.row][newCoord.col] = true;
-          stack.push(coord)
-          stack.push(newCoord)
-          break;
-        }
+
+        visited[newCoord.row][newCoord.col] = true;
+        stack.push(newCoord)
+        stack.push(coord)
+        break;
       }
     }
   }

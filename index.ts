@@ -236,11 +236,11 @@ document.getElementById('random-star-btn').onclick = (event: Event) => {
 }
 document.getElementById('random-maze-dfs-btn').onclick = (event: Event) => {
   let generator = new RandomizedDFS()
-  generator.generate(board)
+  generator.generate(board, animationDelay)
 }
 document.getElementById('random-maze-bfs-btn').onclick = (event: Event) => {
   let generator = new RandomizedBFS()
-  generator.generate(board)
+  generator.generate(board, animationDelay)
 }
 
 // ################################################
