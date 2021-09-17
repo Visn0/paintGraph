@@ -1,1 +1,1 @@
-# paintGraph
+# Path Finding Visualizer
