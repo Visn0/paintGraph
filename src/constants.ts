@@ -15,8 +15,8 @@ export enum AlgorithmType {
 }
 
 export const MAX_ROWS = {
-  BACKTRACKING: 10,
-  BRANCH_AND_BOUND: 25,
+  BACKTRACKING: 25,
+  BRANCH_AND_BOUND: 40,
   A_STAR: 50,
   DEFAULT: 20,
   TOTAL: 50

@@ -1,7 +1,7 @@
 import { IAlgorithm, ICoordinate, BoardPath, validCoord, getPath } from './IAlgorithm'
 import Board from '../Board'
 import AnimationManager from '../AnimationManager';
-import { CellType, MOVES } from '../constants'
+import { CellType, MOVES, randomizeElements } from '../constants'
 
 export class Backtracking implements IAlgorithm {
   #memoization: Array<Array<number>> = []
@@ -28,11 +28,11 @@ export class Backtracking implements IAlgorithm {
     if (currentCell === CellType.WALL) return
 
     // Render the explorated paths
-    if (currentCell !== CellType.BEGIN && currentCell !== CellType.EXIT) {
+    if (currentCell !== CellType.BEGIN && currentCell !== CellType.EXIT && this.#memoization[coord.row][coord.col] === Number.MAX_SAFE_INTEGER) {
       AnimationManager.setExploredCell(coord, this.#animationDelay)
-      board.setTableCellType(coord.row, coord.col, CellType.EXPLORED)
     }
 
+    if (coord.pathLength >= this.#bestPath.length && this.#bestPath.length !== 0) return
     if(coord.pathLength >= this.#memoization[coord.row][coord.col]) return
 
     this.#memoization[coord.row][coord.col] = coord.pathLength

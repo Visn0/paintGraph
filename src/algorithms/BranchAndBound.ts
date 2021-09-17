@@ -33,9 +33,8 @@ export class BranchAndBound implements IAlgorithm {
     if (currentCell === CellType.WALL) return
 
     // Render the explorated paths
-    if (currentCell !== CellType.BEGIN && currentCell !== CellType.EXIT) {
+    if (currentCell !== CellType.BEGIN && currentCell !== CellType.EXIT && this.#memoization[coord.row][coord.col] === Number.MAX_SAFE_INTEGER) {
       AnimationManager.setExploredCell(coord, this.#animationDelay)
-      board.setTableCellType(coord.row, coord.col, CellType.EXPLORED)
     }
 
     // Optimistic bound
