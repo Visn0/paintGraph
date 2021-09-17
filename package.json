@@ -4,7 +4,8 @@
   "description": "Path finding algorithms implementation using TypeScript and providing a UI to create different mazes as well as choosing different algorithms to solve the given maze.",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "heroku-postbuild": "parcel build index.html"
   },
   "keywords": [
     "TypeScript",
