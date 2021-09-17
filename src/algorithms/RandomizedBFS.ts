@@ -3,7 +3,7 @@ import Board from '../Board'
 import AnimationManager from '../AnimationManager';
 import { CellType, getRandomInt, MOVES, randomizeElements } from '../constants'
 
-export class RandomizedDFS {
+export class RandomizedBFS {
   #animationDelay: number
 
   constructor() { }
@@ -14,10 +14,9 @@ export class RandomizedDFS {
     {
       visited.push(new Array<boolean>(board.width).fill(false))
     }
-    // board.clear()
     board.fillWalls()
 
-    let stack: Stack<IBaseCoordinate> = new Stack<IBaseCoordinate>()
+    let stack: Queue<IBaseCoordinate> = new Queue<IBaseCoordinate>()
     let coord = new IBaseCoordinate(getRandomInt(1, board.height - 1), getRandomInt(1, board.width))
     visited[coord.row][coord.col] = true;
     stack.push(coord)

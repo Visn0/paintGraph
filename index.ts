@@ -5,6 +5,7 @@ import { FactoryAlgorithm } from './src/algorithms/FactoryAlgorithm';
 import { BoardPath, IAlgorithm } from './src/algorithms/IAlgorithm';
 import { MazeRandom } from './src/algorithms/MazeRandom';
 import { MazeRandomizedDFS, MyRandomStarMaze } from './src/algorithms/MyRandonStarMaze';
+import { RandomizedBFS } from './src/algorithms/RandomizedBFS';
 import { RandomizedDFS } from './src/algorithms/RandomizedDFS';
 import AnimationManager from './src/AnimationManager';
 import Board from './src/Board';
@@ -235,6 +236,10 @@ document.getElementById('random-star-btn').onclick = (event: Event) => {
 }
 document.getElementById('random-maze-dfs-btn').onclick = (event: Event) => {
   let generator = new RandomizedDFS()
+  generator.generate(board)
+}
+document.getElementById('random-maze-bfs-btn').onclick = (event: Event) => {
+  let generator = new RandomizedBFS()
   generator.generate(board)
 }
 
